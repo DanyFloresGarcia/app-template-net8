@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT}:8081"
+    env_file:
+      - .env
+    volumes:
+      - logs-data:${LOG_PATH}
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;
+      - ASPNETCORE_ENVIRONMENT=${STAGE}
+      - ASPNETCORE_URLS=${ASPNETCORE_URLS}
+      - Logs__Path=${LOG_PATH}/log.txt
+
+volumes:
+  logs-data:

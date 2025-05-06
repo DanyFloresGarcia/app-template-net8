@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
+{
+	"name": "C# (.NET)",
+	"image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0",
+	
+	// Puedes activar características adicionales si deseas
+	// "features": {},
+
+	// Habilita puertos si tu API los necesita
+	"forwardPorts": [5000, 5001],
+
+	// Comando post-creación opcional
+	"postCreateCommand": "dotnet restore",
+
+	// Habilita extensiones dentro del contenedor
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"patcx.vscode-nuget-package-manager", // NuGet Package Manager GUI
+				"ms-dotnettools.csharp"               // Extensión de C# (por si no está)
+			]
+		}
+	},
+	"mounts": [
+  		"source=C:/Dany/Portafolio/v1/logs,target=/mnt/logs,type=bind"
+	]
+	// Puedes habilitar el usuario root si necesitas instalar cosas a nivel sistema
+	// "remoteUser": "root"
+}
