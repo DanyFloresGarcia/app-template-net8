@@ -22,7 +22,7 @@ var app = builder.Build();
 app.UseCors("AllowApiTemplate");
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
