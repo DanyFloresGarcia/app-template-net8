@@ -1,0 +1,5 @@
+2025-05-07 01:04:08 [WRN]   Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://localhost:5054'.
+2025-05-07 01:04:08 [INF]   Now listening on: http://localhost:5054
+2025-05-07 01:04:08 [INF]   Application started. Press Ctrl+C to shut down.
+2025-05-07 01:04:08 [INF]   Hosting environment: Development
+2025-05-07 01:04:08 [INF]   Content root path: /workspaces/app-template-net8/src/API

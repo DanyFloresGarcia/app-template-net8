@@ -62,7 +62,7 @@ public static class DependencyInjection
         services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
         services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
         services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
-        
+
         return services;
     }
 
@@ -70,14 +70,16 @@ public static class DependencyInjection
     {
         var logToFile = bool.TryParse(configuration["UseFile"], out var consoleEnabled) && consoleEnabled;
 
+        Console.WriteLine("Serilog:WriteTo:0:Args:path: " + configuration["Serilog:WriteTo:0:Args:path"]!);
+
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(configuration)
             .Enrich.FromLogContext()
-            .WriteToFileOrConsole(configuration["Logs__Path"]!, logToFile)
+            .WriteToFileOrConsole(configuration["Serilog:WriteTo:0:Args:path"]!, logToFile)
             .CreateLogger();
     }
 
-    // Método de extensión para escribir en archivo o consola
+    // Método de extensión para escribir en archivo" o consola
     private static LoggerConfiguration WriteToFileOrConsole(this LoggerConfiguration loggerConfig, string path, bool toFile)
     {
         return toFile
