@@ -16,7 +16,7 @@ RUN dotnet restore "src/API/API.csproj"
 
 COPY . .
 WORKDIR "/src/API"
-RUN dotnet publish "API.csproj" -c $BUILD_CONFIGURATION -o /app/publish
+RUN dotnet publish "src/API/API.csproj" -c $BUILD_CONFIGURATION -o /app/publish
 
 # Final stage
 FROM base AS final
