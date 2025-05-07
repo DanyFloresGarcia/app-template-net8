@@ -15,11 +15,11 @@ services:
       - ASPNETCORE_URLS=${ASPNETCORE_URLS}
       - LOG_PATH=${LOG_PATH}/log.txt
     networks:
-      - mi_red  # Usar la misma red para la comunicación con el contenedor SQL Server
+      - sql_server_mi_red  # Usar la misma red para la comunicación con el contenedor SQL Server
 
 volumes:
   logs-data:
 
 networks:
-  mi_red:  # Usar el mismo nombre de red que en el otro docker-compose
-    external: false  # Especificar que la red es interna y debe ser creada automáticamente
+  sql_server_mi_red:  # Usar el mismo nombre de red que en el otro docker-compose
+    external: true  # Especificar que la red es interna y debe ser creada automáticamente
