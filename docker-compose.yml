@@ -13,7 +13,6 @@ services:
       - ConnectionStrings__DefaultConnection=Server=${DB_HOST},${DB_PORT};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;
       - ASPNETCORE_ENVIRONMENT=${STAGE}
       - ASPNETCORE_URLS=${ASPNETCORE_URLS}
-      - LOG_PATH=${LOG_PATH}/log.txt
     networks:
       - sql_server_mi_red  # Usar la misma red para la comunicación con el contenedor SQL Server
 

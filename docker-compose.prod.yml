@@ -1,22 +1,22 @@
 services:
-  apphangfire:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: apphangfire:${APP_VERSION}
-    container_name: apphangfire
     ports:
-      - "${PORT}:80"
+      - "${PORT}:8081"
+    env_file:
+      - .env
+    volumes:
+      - /c/Dany/Portafolio/v1/logs:/mnt/logs
     environment:
+      - ConnectionStrings__DefaultConnection=Server=${DB_HOST},${DB_PORT};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;
       - ASPNETCORE_ENVIRONMENT=${STAGE}
-      - APP_VERSION=${APP_VERSION}
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+      - ASPNETCORE_URLS=${ASPNETCORE_URLS}
+    networks:
+      - sql_server_mi_red  # Usar la misma red para la comunicación con el contenedor SQL Server
+
+
+networks:
+  sql_server_mi_red:  # Usar el mismo nombre de red que en el otro docker-compose
+    external: true  # Especificar que la red es interna y debe ser creada automáticamente

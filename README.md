@@ -34,7 +34,7 @@ Antes de crear la solución, puedes configurar un ambiente Docker local para tra
 
 Con este enfoque, puedes trabajar con .NET 8 sin instalarlo directamente en tu máquina, manteniendo tu entorno limpio.
 A continuación, se explica cómo crear un proyecto en .NET 8 utilizando el enfoque de Clean Architecture mediante comandos:
-## Pasos
+## Pasos 
 
 1. **Crear la solución principal**:
   ```bash
@@ -89,7 +89,15 @@ A continuación, se explica cómo crear un proyecto en .NET 8 utilizando el enfo
   o
   dotnet run --project src/API/API.csproj
   ```
-7. **Instalar ef global**:
+
+
+Con esta estructura, los proyectos estarán organizados dentro de la carpeta `src`, manteniendo un diseño limpio y escalable.
+
+¡Listo! Ahora tienes una solución básica con Clean Architecture en .NET 8.
+
+
+## Comandos EF
+1. **Instalar ef global**:
   Navega al directorio del proyecto API y ejecuta:
   ```
     dotnet tool install --global dotnet-ef
@@ -100,20 +108,34 @@ A continuación, se explica cómo crear un proyecto en .NET 8 utilizando el enfo
   ```
   dotnet tool restore
   ```
-8. **Crear archivo de migracion**:
+## Migracion EF
+1. **Crear archivo de migracion**:
   Navega al directorio del proyecto API y ejecuta:
   ```
     dotnet ef migrations add InitialCreate --project src/Infrastructure --startup-project src/API
   ```
 
-9. **Ejecutar la migracion**:
+2. **Ejecutar la migracion**:
   Navega al directorio del proyecto API y ejecuta:
   ```
     dotnet ef database update --project src/Infrastructure --startup-project src/API
   ```  
 
+## Commandos Docker
 
-Con esta estructura, los proyectos estarán organizados dentro de la carpeta `src`, manteniendo un diseño limpio y escalable.
+1. **Entrar en el sh del contenedor docker**
+  Navega y ejecuta el siguiente comando:
+  ```
+    docker exec -it <CONTAINER_NAME> sh
+  ```  
 
-¡Listo! Ahora tienes una solución básica con Clean Architecture en .NET 8.
-
+2. **Instalar telnet y ping en docker**
+  Navega y ejecuta el siguiente comando:
+  ```
+    docker run -it --rm --network app-template-net8-app-1 nicolaka/netshoot
+  ```  
+3. **Listar conexiones de contenedores**
+   Navega y ejecuta el siguiente comando:
+  ```
+    docker network ls
+  ```  
