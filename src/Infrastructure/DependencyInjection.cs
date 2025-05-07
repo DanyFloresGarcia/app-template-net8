@@ -23,6 +23,8 @@ public static class DependencyInjection{
         //ConnectionString
         string connectionString = configuration.GetConnectionString("DefaultConnection")!;
 
+        Console.WriteLine("Connection string: " + connectionString);
+
         //EntityFramework
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
