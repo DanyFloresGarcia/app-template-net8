@@ -8,14 +8,18 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
+# Copy csproj and restore as distinct layers
 COPY ["src/API/API.csproj", "src/API/"]
 COPY ["src/Application/Application.csproj", "src/Application/"]
 COPY ["src/Domain/Domain.csproj", "src/Domain/"]
 COPY ["src/Infrastructure/Infrastructure.csproj", "src/Infrastructure/"]
+
+# Restore dependences
 RUN dotnet restore "src/API/API.csproj"
 
 COPY . .
-WORKDIR "/src/API"
+# Publish the application
+#WORKDIR "/src/API"
 RUN dotnet publish "src/API/API.csproj" -c $BUILD_CONFIGURATION -o /app/publish
 
 # Final stage
