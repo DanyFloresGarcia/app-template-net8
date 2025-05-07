@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
     volumes:
-      - logs-data:${LOG_PATH}
+      - /c/Dany/Portafolio/v1/logs:/mnt/logs
     environment:
       - ConnectionStrings__DefaultConnection=Server=${DB_HOST},${DB_PORT};Database=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD};TrustServerCertificate=True;
       - ASPNETCORE_ENVIRONMENT=${STAGE}
@@ -17,8 +17,6 @@ services:
     networks:
       - sql_server_mi_red  # Usar la misma red para la comunicación con el contenedor SQL Server
 
-volumes:
-  logs-data:
 
 networks:
   sql_server_mi_red:  # Usar el mismo nombre de red que en el otro docker-compose
