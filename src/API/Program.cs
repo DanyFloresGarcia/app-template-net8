@@ -44,7 +44,6 @@ app.UseSerilogRequestLogging(options =>
 Console.WriteLine("Connection string: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 Console.WriteLine("Environment: " + builder.Environment.EnvironmentName);
 
-app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();

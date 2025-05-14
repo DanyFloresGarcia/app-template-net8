@@ -2,14 +2,15 @@ using Microsoft.EntityFrameworkCore;
 
 using Domain.Customers;
 using Domain.Customers.Interfaces;
+using Application.Data;
 
 namespace Infrastructure.Persistence.Repositories;
 
 public class CustomerRepository : ICustomerRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IApplicationDbContext _context;
 
-    public CustomerRepository(ApplicationDbContext context)
+    public CustomerRepository(IApplicationDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }

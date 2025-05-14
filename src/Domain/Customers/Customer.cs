@@ -7,6 +7,7 @@ public sealed class Customer : AggregateRoot
     public string Name { get; private set; } = string.Empty;
     public string LastName { get; private set; } = string.Empty;
     public string Email { get; private set; } = string.Empty;
+    public string Address { get; private set; } = string.Empty;
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
     public AuditRecord AuditRecord { get; private set; }

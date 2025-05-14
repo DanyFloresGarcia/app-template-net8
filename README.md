@@ -139,3 +139,10 @@ Con esta estructura, los proyectos estarán organizados dentro de la carpeta `sr
   ```
     docker network ls
   ```  
+
+  ## Crear certificado en Dev
+
+1. **Crear**
+  ```  
+    dotnet dev-certs https
+  ```  

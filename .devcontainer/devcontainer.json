@@ -23,7 +23,7 @@
 		}
 	},
 	"mounts": [
-  		"source=C:/Dany/Portafolio/v1/logs,target=/mnt/logs,type=bind"
+  		"source=C:/Dany/Portafolio/v1/logs/dev,target=/mnt/logs,type=bind"
 	]
 	// Puedes habilitar el usuario root si necesitas instalar cosas a nivel sistema
 	// "remoteUser": "root"

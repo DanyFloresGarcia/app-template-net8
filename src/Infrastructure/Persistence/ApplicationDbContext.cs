@@ -20,12 +20,13 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWor
 
     public DbSet<Customer> Customers { get; set;}
 
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-    }
+	// protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+    // }
 
-    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken()){
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    {
         var domainEvents = ChangeTracker.Entries<AggregateRoot>()
         .Select(e=> e.Entity)
         .Where(e=> e.GetDomainEvents().Any())
@@ -38,9 +39,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWor
         }
 
         return result;
-
     }
-
 
     // Metodos para manejar las transacciones
     public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
@@ -95,6 +94,5 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWor
             }
         }
     }
-
 
 }
