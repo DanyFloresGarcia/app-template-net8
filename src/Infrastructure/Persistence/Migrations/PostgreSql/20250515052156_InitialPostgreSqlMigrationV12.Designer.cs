@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Persistence.Migrations.PostgreSql
 {
     [DbContext(typeof(ApplicationDbContextPostgreSql))]
-    partial class ApplicationDbContextPostgreSqlModelSnapshot : ModelSnapshot
+    [Migration("20250515052156_InitialPostgreSqlMigrationV12")]
+    partial class InitialPostgreSqlMigrationV12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +36,8 @@ namespace Infrastructure.Persistence.Migrations.PostgreSql
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("character varying(120)")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("Address");
 
                     b.Property<string>("Email")
@@ -62,7 +65,7 @@ namespace Infrastructure.Persistence.Migrations.PostgreSql
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Customer", "dbo");
+                    b.ToTable("Customer", "mae");
                 });
 
             modelBuilder.Entity("Domain.Customers.Customer", b =>
@@ -122,7 +125,7 @@ namespace Infrastructure.Persistence.Migrations.PostgreSql
 
                             b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer", "dbo");
+                            b1.ToTable("Customer", "mae");
 
                             b1.WithOwner()
                                 .HasForeignKey("CustomerId");

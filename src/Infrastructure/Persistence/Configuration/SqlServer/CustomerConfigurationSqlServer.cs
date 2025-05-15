@@ -3,13 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Domain.Customers;
-using Domain.ValueObjects;
 
 namespace Infrastructure.Persistence.Configuration.SqlServer;
 
-public class CustomerConfiguration : IEntityTypeConfiguration<Customer>{
+public class CustomerConfigurationSqlServer : IEntityTypeConfiguration<Customer>{
     public void Configure(EntityTypeBuilder<Customer> builder){
-        builder.ToTable("Customer", "mae");
+        builder.ToTable("Customer", "dbo");
         builder.HasKey(c=> c.Id);
         builder.HasIndex(e => e.Id);
         builder.Property(d => d.Id).HasColumnName("IdCustomer")

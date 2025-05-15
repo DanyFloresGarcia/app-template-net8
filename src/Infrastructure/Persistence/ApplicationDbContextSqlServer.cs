@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure.Persistence.Configuration.SqlServer;
 
 namespace Infrastructure.Persistence;
 
@@ -11,6 +12,6 @@ public class ApplicationDbContextSqlServer : ApplicationDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(
-            typeof(Configuration.SqlServer.CustomerConfiguration).Assembly);
+            typeof(CustomerConfigurationSqlServer).Assembly);
     }
 }

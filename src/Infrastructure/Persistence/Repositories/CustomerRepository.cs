@@ -22,6 +22,8 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<IEnumerable<Customer>> GetAllAsync()
     {
+        Console.WriteLine($"DbContext actual: {_context.GetType().Name}");
+
         return await _context.Customers.ToListAsync();
     }
 

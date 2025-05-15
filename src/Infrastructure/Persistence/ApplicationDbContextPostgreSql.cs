@@ -1,5 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure.Persistence.Configuration.PostgreSql;
+
 
 namespace Infrastructure.Persistence;
 
@@ -11,6 +13,6 @@ public class ApplicationDbContextPostgreSql : ApplicationDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(
-            typeof(Configuration.PostgreSql.CustomerConfigurationPostgreSql).Assembly);
+            typeof(CustomerConfigurationPostgreSql).Assembly);
     }
 }
