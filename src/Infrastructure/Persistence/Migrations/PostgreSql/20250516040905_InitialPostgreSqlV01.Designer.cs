@@ -3,60 +3,60 @@ using System;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Migrations
+namespace Infrastructure.Persistence.Migrations.PostgreSql
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250506171208_Cambiar_Esquema")]
-    partial class Cambiar_Esquema
+    [DbContext(typeof(ApplicationDbContextPostgreSql))]
+    [Migration("20250516040905_InitialPostgreSqlV01")]
+    partial class InitialPostgreSqlV01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.Customers.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("IdCustomer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("Address");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("Email");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("LastName");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("Name");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -65,7 +65,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Customer", "dbo");
+                    b.ToTable("Customer", "public");
                 });
 
             modelBuilder.Entity("Domain.Customers.Customer", b =>
@@ -73,59 +73,59 @@ namespace Infrastructure.Migrations
                     b.OwnsOne("Domain.ValueObjects.AuditRecord", "AuditRecord", b1 =>
                         {
                             b1.Property<int>("CustomerId")
-                                .HasColumnType("int");
+                                .HasColumnType("integer");
 
                             b1.Property<string>("AppCreator")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("AppCreator");
 
                             b1.Property<string>("AppUpdater")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("AppUpdater");
 
                             b1.Property<bool>("Asset")
-                                .HasColumnType("bit")
+                                .HasColumnType("boolean")
                                 .HasColumnName("Asset");
 
                             b1.Property<DateTime>("DateCreated")
-                                .HasColumnType("datetime2")
+                                .HasColumnType("timestamp with time zone")
                                 .HasColumnName("DateCreated");
 
                             b1.Property<DateTime>("DateUpdate")
-                                .HasColumnType("datetime2")
+                                .HasColumnType("timestamp with time zone")
                                 .HasColumnName("DateUpdate");
 
                             b1.Property<string>("HostCreator")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("nvarchar(100)")
+                                .HasColumnType("character varying(100)")
                                 .HasColumnName("HostCreator");
 
                             b1.Property<string>("HostUpdater")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("nvarchar(100)")
+                                .HasColumnType("character varying(100)")
                                 .HasColumnName("HostUpdater");
 
                             b1.Property<string>("UserCreator")
                                 .IsRequired()
                                 .HasMaxLength(30)
-                                .HasColumnType("nvarchar(30)")
+                                .HasColumnType("character varying(30)")
                                 .HasColumnName("UserCreator");
 
                             b1.Property<string>("UserUpdater")
                                 .IsRequired()
                                 .HasMaxLength(30)
-                                .HasColumnType("nvarchar(30)")
+                                .HasColumnType("character varying(30)")
                                 .HasColumnName("UserUpdater");
 
                             b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer", "dbo");
+                            b1.ToTable("Customer", "public");
 
                             b1.WithOwner()
                                 .HasForeignKey("CustomerId");

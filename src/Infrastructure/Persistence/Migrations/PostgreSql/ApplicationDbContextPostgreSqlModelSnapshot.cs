@@ -33,26 +33,26 @@ namespace Infrastructure.Persistence.Migrations.PostgreSql
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("character varying(120)")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("Address");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("Email");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("LastName");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("Name");
 
                     b.HasKey("Id");
@@ -62,7 +62,7 @@ namespace Infrastructure.Persistence.Migrations.PostgreSql
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Customer", "dbo");
+                    b.ToTable("Customer", "public");
                 });
 
             modelBuilder.Entity("Domain.Customers.Customer", b =>
@@ -122,7 +122,7 @@ namespace Infrastructure.Persistence.Migrations.PostgreSql
 
                             b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer", "dbo");
+                            b1.ToTable("Customer", "public");
 
                             b1.WithOwner()
                                 .HasForeignKey("CustomerId");

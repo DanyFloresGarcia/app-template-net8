@@ -1,15 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using Infrastructure.Persistence;
+using Application.Data;
 
 namespace API.Extensions;
 
 public static class MigrationExtensions{
     public static void ApplyMigrations(this WebApplication app){
-        using var scope = app.Services.CreateScope();
-        
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        
-        dbContext.Database.Migrate();
 
+        Console.WriteLine("Applying migrations...");
+        using var scope = app.Services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();        
+        dbContext.Database.Migrate();
     }
 }

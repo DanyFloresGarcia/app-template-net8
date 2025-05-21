@@ -23,22 +23,15 @@ public static class DependencyInjection
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
                 var databaseSettings = configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>()!;
+                Console.WriteLine(databaseSettings.Provider);
                 Console.WriteLine(databaseSettings.ConnectionString);
-
                 switch (databaseSettings.Provider)
                 {
                         case DatabaseProvider.SqlServer:
-                                services.AddDbContext<ApplicationDbContextSqlServer>(options =>
-                                        options.UseSqlServer(databaseSettings.ConnectionString));
-                                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
-                                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
-
+                                AddDbContextSqlServer(services, databaseSettings.ConnectionString);
                                 break;
                         case DatabaseProvider.PostgreSql:
-                                services.AddDbContext<ApplicationDbContextPostgreSql>(options =>
-                                        options.UseNpgsql(databaseSettings.ConnectionString));
-                                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
-                                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
+                                AddDbContextPostgreSql(services, databaseSettings.ConnectionString);
                                 break;
                 }
 
@@ -47,7 +40,6 @@ public static class DependencyInjection
 
                 // services.AddScoped<IUnitOfWork>(sp =>
                 //         sp.GetRequiredService<IApplicationDbContext>());
-
 
                 //Repository
                 services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -62,5 +54,20 @@ public static class DependencyInjection
                 //services.AddTransient<SomeApplication>();
 
                 return services;
+        }
+
+        private static void AddDbContextSqlServer(IServiceCollection services, string connectionString)
+        {
+                services.AddDbContext<ApplicationDbContextSqlServer>(options =>
+                                        options.UseSqlServer(connectionString));
+                                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
+                                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
+        }
+        private static void AddDbContextPostgreSql(IServiceCollection services, string connectionString)
+        {
+                services.AddDbContext<ApplicationDbContextPostgreSql>(options =>
+                                        options.UseNpgsql(connectionString));
+                                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
+                                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
         }
 }

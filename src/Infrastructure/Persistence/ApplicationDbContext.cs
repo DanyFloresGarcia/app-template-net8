@@ -4,11 +4,10 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 using Application.Data;
 using Domain.Primitives;
-using Domain.Customers;
 
 namespace Infrastructure.Persistence;
 
-public abstract class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWork
+public abstract class ApplicationDbContext : DbContext, IUnitOfWork
 {
     public readonly IPublisher _publiser;
     private IDbContextTransaction? _currentTransaction;
@@ -18,12 +17,8 @@ public abstract class ApplicationDbContext : DbContext, IApplicationDbContext, I
         _publiser = publiser ?? throw new ArgumentNullException(nameof(publiser));
     }
 
-    public DbSet<Customer> Customers { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-    }
+    protected abstract override void OnModelCreating(ModelBuilder modelBuilder);
+    
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     {
         var domainEvents = ChangeTracker.Entries<AggregateRoot>()
