@@ -2,6 +2,7 @@ using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Customers.GetAll;
+using Application.Customers.Create;
 
 namespace API.Controllers;
 
@@ -19,7 +20,7 @@ public class CustomerController : ApiController
     /// Gets all customers.
     /// </summary>
     /// <returns>The result of the operation, which is either a list of customers or a list of errors</returns>
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAllCustomer()
     {
@@ -27,6 +28,17 @@ public class CustomerController : ApiController
 
         return customersResult.Match(
             customers => Ok(customers),
+            errors => Problem(errors)
+        );
+    }    
+
+    [HttpPost]
+    public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
+    {
+        var createCustomerResult = await _mediator.Send(createCustomerCommand);
+
+         return createCustomerResult.Match(
+            customerResult => Created(string.Empty, customerResult),
             errors => Problem(errors)
         );
     }

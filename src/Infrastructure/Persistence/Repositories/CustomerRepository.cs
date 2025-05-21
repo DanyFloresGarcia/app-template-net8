@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Domain.Customers;
 using Domain.Customers.Interfaces;
+using Domain.ValueObjects;
 using Application.Data;
 
 namespace Infrastructure.Persistence.Repositories;
@@ -23,28 +24,60 @@ public class CustomerRepository : ICustomerRepository
     public async Task<IEnumerable<Customer>> GetAllAsync()
     {
         Console.WriteLine($"DbContext actual: {_context.GetType().Name}");
-
         return await _context.Customers.ToListAsync();
     }
 
     public async Task AddAsync(Customer customer)
     {
-        if (customer == null) throw new ArgumentNullException(nameof(customer));
-        await _context.Customers.AddAsync(customer);
-        await _context.SaveChangesAsync();
+        if (customer != null)
+        {
+            await _context.Customers.AddAsync(customer);
+        }
+        else
+        {
+            throw new ArgumentNullException(nameof(customer));
+        }
     }
 
-    public async Task UpdateAsync(Customer customer)
+    public async Task UpdateAsync(Customer customer, AuditRecord auditRecord)
     {
-        if (customer == null) throw new ArgumentNullException(nameof(customer));
-        _context.Customers.Update(customer);
-        await _context.SaveChangesAsync();
+        Customer customerOld = await GetByIdAsync(customer.Id);
+
+        var trackedEntity = _context.ChangeTracker.Entries<Customer>()
+                              .FirstOrDefault(e => e.Entity.Id == customer.Id);
+
+        if (trackedEntity == null)
+        {
+            var entry = _context.Entry(customer);
+            customerOld.Address = customer.Address;
+            customerOld.Email = customer.Email;
+            customerOld.AuditRecord = auditRecord;
+        }
+        else
+        {
+            customer = trackedEntity.Entity;
+            customerOld.Address = customer.Address;
+            customerOld.Email = customer.Email;
+            customer.AuditRecord = auditRecord;
+        }
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id, AuditRecord auditRecord)
     {
-        var customer = await GetByIdAsync(id);
-        _context.Customers.Remove(customer);
-        await _context.SaveChangesAsync();
+        Customer customer = await GetByIdAsync(id);
+
+        var trackedEntity = _context.ChangeTracker.Entries<Customer>()
+                                .FirstOrDefault(e => e.Entity.Id == customer.Id);
+
+        if (trackedEntity == null)
+        {
+            var entry = _context.Entry(customer);
+            customer.AuditRecord = auditRecord;
+        }
+        else
+        {
+            customer = trackedEntity.Entity;
+            customer.AuditRecord = auditRecord;
+        }
     }
 }
