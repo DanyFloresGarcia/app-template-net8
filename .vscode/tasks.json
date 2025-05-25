@@ -7,6 +7,13 @@
 			"file": "/workspaces/app-template-net8/src/API/API.csproj",
 			"problemMatcher": [],
 			"label": "dotnet: watch API"
+		},
+		{
+			"type": "dotnet",
+			"task": "watch API",
+			"file": "D:\\DANY\\proyecto-personal\\backend\\app-template-net8\\src\\API\\API.csproj",
+			"problemMatcher": [],
+			"label": "dotnet: watch API"
 		}
 	]
 }

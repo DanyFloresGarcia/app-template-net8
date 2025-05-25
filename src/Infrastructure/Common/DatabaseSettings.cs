@@ -18,8 +18,11 @@ public class DatabaseSettings
             {
                 DatabaseProvider.SqlServer => $"Server={Host},{Port};Database={Database};User Id={UserId};Password={Password};TrustServerCertificate={TrustServerCertificate};",
                 DatabaseProvider.PostgreSql => $"Host={Host};Port={Port};Username={UserId};Password={Password};Database={Database};Pooling=true;Maximum Pool Size={MaxConnections};",
+                DatabaseProvider.MongoDb => $"mongodb://${UserId}:${Password}@{Host}:{Port}",
+                DatabaseProvider.Mysql => $"Server={Host};Port={Port};Database={Database};User={UserId};Password={Password};",
                 _ => throw new NotSupportedException($"Database provider '{Provider}' is not supported."),
             };
         }
     }
 }
+

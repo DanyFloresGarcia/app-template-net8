@@ -120,6 +120,15 @@ Con esta estructura, los proyectos estarán organizados dentro de la carpeta `sr
   ```
     dotnet ef database update --project src/Infrastructure --startup-project src/API
   ```  
+  ## Migration Mysql
+ ```
+  dotnet ef migrations add InitialCreateMysql --context ApplicationDbContextMySql --output-dir Persistence/Migrations/Mysql --project src/Infrastructure --startup-project src/API
+ ```
+
+ ## Actualizar Mysql
+  ```
+    dotnet ef database update --context ApplicationDbContextMySql --project src/Infrastructure --startup-project src/API
+  ```
 
 ## Commandos Docker
 

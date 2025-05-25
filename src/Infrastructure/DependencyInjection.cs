@@ -28,10 +28,16 @@ public static class DependencyInjection
                 switch (databaseSettings.Provider)
                 {
                         case DatabaseProvider.SqlServer:
-                                AddDbContextSqlServer(services, databaseSettings.ConnectionString);
+                                AddDbContextSqlServer(services, databaseSettings);
                                 break;
                         case DatabaseProvider.PostgreSql:
-                                AddDbContextPostgreSql(services, databaseSettings.ConnectionString);
+                                AddDbContextPostgreSql(services, databaseSettings);
+                                break;
+                        case DatabaseProvider.MongoDb:
+                                AddDbContextMongoDb(services, databaseSettings);
+                                break;
+                        case DatabaseProvider.Mysql:
+                                AddDbContextMysqlDb(services, databaseSettings);
                                 break;
                 }
 
@@ -45,7 +51,6 @@ public static class DependencyInjection
                 services.AddScoped<ICustomerRepository, CustomerRepository>();
 
                 //Domain
-
                 //Services
 
                 //Singleton
@@ -56,18 +61,36 @@ public static class DependencyInjection
                 return services;
         }
 
-        private static void AddDbContextSqlServer(IServiceCollection services, string connectionString)
+        private static void AddDbContextSqlServer(IServiceCollection services, DatabaseSettings databaseSettings)
         {
                 services.AddDbContext<ApplicationDbContextSqlServer>(options =>
-                                        options.UseSqlServer(connectionString));
-                                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
-                                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
+                                        options.UseSqlServer(databaseSettings.ConnectionString));
+                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
+                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
         }
-        private static void AddDbContextPostgreSql(IServiceCollection services, string connectionString)
+        private static void AddDbContextPostgreSql(IServiceCollection services, DatabaseSettings databaseSettings)
         {
                 services.AddDbContext<ApplicationDbContextPostgreSql>(options =>
-                                        options.UseNpgsql(connectionString));
-                                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
-                                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
+                                        options.UseNpgsql(databaseSettings.ConnectionString));
+                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
+                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
+        }
+
+        private static void AddDbContextMongoDb(IServiceCollection services, DatabaseSettings databaseSettings)
+        {
+                services.AddDbContext<ApplicationDbContextMongoDb>(options =>
+                                        options.UseMongoDB(databaseSettings.ConnectionString, databaseSettings.Database));
+                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextMongoDb>());
+                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextMongoDb>());
+        }
+        
+         private static void AddDbContextMysqlDb(IServiceCollection services, DatabaseSettings databaseSettings)
+        {
+                services.AddDbContext<ApplicationDbContextMySql>(options =>
+                                        options.UseMySql(
+                                                databaseSettings.ConnectionString,
+                                                ServerVersion.AutoDetect(databaseSettings.ConnectionString)));
+                                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextMySql>());
+                                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextMySql>());
         }
 }

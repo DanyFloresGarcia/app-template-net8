@@ -30,7 +30,7 @@ public class CustomerController : ApiController
             customers => Ok(customers),
             errors => Problem(errors)
         );
-    }    
+    }
 
     [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)

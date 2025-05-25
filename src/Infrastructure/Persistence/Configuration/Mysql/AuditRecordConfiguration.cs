@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Domain.ValueObjects;
 
-namespace Infrastructure.Persistence.Configuration.SqlServer;
+namespace Infrastructure.Persistence.Configuration.Mysql;
 
 public static class AuditRecordConfiguration
 {
