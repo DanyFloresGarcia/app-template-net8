@@ -20,6 +20,7 @@ public class DatabaseSettings
                 DatabaseProvider.PostgreSql => $"Host={Host};Port={Port};Username={UserId};Password={Password};Database={Database};Pooling=true;Maximum Pool Size={MaxConnections};",
                 DatabaseProvider.MongoDb => $"mongodb://${UserId}:${Password}@{Host}:{Port}",
                 DatabaseProvider.Mysql => $"Server={Host};Port={Port};Database={Database};User={UserId};Password={Password};",
+                DatabaseProvider.Oracle => $"User Id={UserId};Password={Password};Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={Host})(PORT={Port}))(CONNECT_DATA=(SERVICE_NAME={Database})))",
                 _ => throw new NotSupportedException($"Database provider '{Provider}' is not supported."),
             };
         }

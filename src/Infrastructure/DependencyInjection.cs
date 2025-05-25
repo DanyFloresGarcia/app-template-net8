@@ -2,13 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using Application.Common.Mappings;
 using Domain.Customers.Interfaces;
 using Domain.Primitives;
+using Application.Common.Mappings;
 using Application.Data;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
 using Infrastructure.Common;
+using System.Data;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Infrastructure;
 
@@ -39,16 +41,17 @@ public static class DependencyInjection
                         case DatabaseProvider.Mysql:
                                 AddDbContextMysqlDb(services, databaseSettings);
                                 break;
+                        case DatabaseProvider.Oracle:
+                                AddDbContextOracleDb(services, databaseSettings);
+                                break;
                 }
 
                 //AutoMapper
                 services.AddAutoMapper(typeof(MappingProfile));
 
                 // services.AddScoped<IUnitOfWork>(sp =>
-                //         sp.GetRequiredService<IApplicationDbContext>());
+                // sp.GetRequiredService<IApplicationDbContext>());
 
-                //Repository
-                services.AddScoped<ICustomerRepository, CustomerRepository>();
 
                 //Domain
                 //Services
@@ -67,6 +70,9 @@ public static class DependencyInjection
                                         options.UseSqlServer(databaseSettings.ConnectionString));
                 services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
                 services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
+                
+                //Repository
+                services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
         private static void AddDbContextPostgreSql(IServiceCollection services, DatabaseSettings databaseSettings)
         {
@@ -74,6 +80,8 @@ public static class DependencyInjection
                                         options.UseNpgsql(databaseSettings.ConnectionString));
                 services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
                 services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextPostgreSql>());
+                //Repository
+                services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
 
         private static void AddDbContextMongoDb(IServiceCollection services, DatabaseSettings databaseSettings)
@@ -82,15 +90,30 @@ public static class DependencyInjection
                                         options.UseMongoDB(databaseSettings.ConnectionString, databaseSettings.Database));
                 services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextMongoDb>());
                 services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextMongoDb>());
+                //Repository
+                services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
-        
-         private static void AddDbContextMysqlDb(IServiceCollection services, DatabaseSettings databaseSettings)
+
+        private static void AddDbContextMysqlDb(IServiceCollection services, DatabaseSettings databaseSettings)
         {
                 services.AddDbContext<ApplicationDbContextMySql>(options =>
                                         options.UseMySql(
                                                 databaseSettings.ConnectionString,
                                                 ServerVersion.AutoDetect(databaseSettings.ConnectionString)));
-                                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextMySql>());
-                                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextMySql>());
+                services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextMySql>());
+                services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextMySql>());
+                //Repository
+                services.AddScoped<ICustomerRepository, CustomerRepository>();
+        }
+
+        private static void AddDbContextOracleDb(IServiceCollection services, DatabaseSettings databaseSettings)
+        {
+                services.AddScoped<IDapperDbContext>(sp =>
+                        new OracleDapperDbContext(databaseSettings.ConnectionString));
+
+                //Repository
+                services.AddScoped<ICustomerRepository, CustomerRepositoryDapper>();
+                //UnitOfWork
+                services.AddScoped<IUnitOfWork, DapperUnitOfWork>();
         }
 }

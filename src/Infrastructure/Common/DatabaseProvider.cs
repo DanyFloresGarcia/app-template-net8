@@ -6,4 +6,5 @@ public class DatabaseProvider
     public const string PostgreSql = "PostgreSql";
     public const string MongoDb = "MongoDb";
     public const string Mysql = "Mysql";
+    public const string Oracle = "Oracle";
 }
