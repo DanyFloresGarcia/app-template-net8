@@ -20,8 +20,10 @@ services:
       - ASPNETCORE_URLS=${ASPNETCORE_URLS}
     networks:
       - sql_server_mi_red  # Usar la misma red para la comunicación con el contenedor SQL Server
-      - default
+      - app-template-net8_default
 
 networks:
   sql_server_mi_red:  # Usar el mismo nombre de red que en el otro docker-compose
     external: true  # Especificar que la red es interna y debe ser creada automáticamente
+  app-template-net8_default:
+    external: true

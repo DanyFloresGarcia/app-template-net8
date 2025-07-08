@@ -22,9 +22,9 @@ public class CustomerController : ApiController
     /// <returns>The result of the operation, which is either a list of customers or a list of errors</returns>
 
     [HttpGet]
-    public async Task<IActionResult> GetAllCustomer()
+    public async Task<IActionResult> GetAllCustomer([FromQuery] GetAllCustomerQuery query)
     {
-        var customersResult = await _mediator.Send(new GetAllCustomerQuery());
+        var customersResult = await _mediator.Send(query);
 
         return customersResult.Match(
             customers => Ok(customers),

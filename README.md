@@ -109,25 +109,14 @@ Con esta estructura, los proyectos estarán organizados dentro de la carpeta `sr
   dotnet tool restore
   ```
 ## Migracion EF
-1. **Crear archivo de migracion**:
-  Navega al directorio del proyecto API y ejecuta:
-  ```
-    dotnet ef migrations add InitialCreate --project src/Infrastructure --startup-project src/API
-  ```
-
-2. **Ejecutar la migracion**:
-  Navega al directorio del proyecto API y ejecuta:
-  ```
-    dotnet ef database update --project src/Infrastructure --startup-project src/API
-  ```  
-  ## Migration Mysql
+  ### Migration Database
  ```
-  dotnet ef migrations add InitialCreateMysql --context ApplicationDbContextMySql --output-dir Persistence/Migrations/Mysql --project src/Infrastructure --startup-project src/API
+  dotnet ef migrations add InitialCreatePostgreSQL --context ApplicationDbContextPostgreSql --output-dir Persistence/Migrations/PostgreSQL --project src/Infrastructure --startup-project src/API
  ```
 
- ## Actualizar Mysql
+ ### Actualizar Database
   ```
-    dotnet ef database update --context ApplicationDbContextMySql --project src/Infrastructure --startup-project src/API
+    dotnet ef database update --context ApplicationDbContextPostgreSql --project src/Infrastructure --startup-project src/API
   ```
 
 ## Commandos Docker
@@ -155,3 +144,92 @@ Con esta estructura, los proyectos estarán organizados dentro de la carpeta `sr
   ```  
     dotnet dev-certs https
   ```  
+
+# Lambda
+
+## 1. Create carpeta lambda
+```
+  mkdir -p src/Lambdas/CreateInvitadoLambda
+  cd src/Lambdas/CreateInvitadoLambda
+```
+## 2. Crear proyecto lambda
+```
+  dotnet new console -n CreateInvitadoLambda
+```
+## 3. Paquetes necesarios 
+
+cd CreateInvitadoLambda
+
+```
+  dotnet add package Amazon.Lambda.Core
+  dotnet add package Amazon.Lambda.Serialization.SystemTextJson
+  dotnet add package Microsoft.Extensions.DependencyInjection
+```
+## 4. Agregar referencias
+```
+  dotnet add reference ../../../Application/Application.csproj
+  dotnet add reference ../../../Domain/Domain.csproj
+  dotnet add reference ../../../Infrastructure/Infrastructure.csproj
+```
+
+## 5. Agregar el archivo aws-lambda-tools-defaults.json
+```
+  touch aws-lambda-tools-defaults.json
+```
+Contenido:
+{
+  "Information": [ "Config for Lambda Test Tool" ],
+  "profile": "default",
+  "region": "us-east-1",
+  "configuration": "Release",
+  "function-runtime": "dotnet8",
+  "function-handler": "CreateInvitadoLambda::CreateInvitadoLambda.Function::FunctionHandler",
+  "framework": "net8.0",
+  "function-name": "CreateInvitadoLambda",
+  "function-memory-size": 256,
+  "function-timeout": 30,
+  "function-role": "arn:aws:iam::123456789012:role/lambda_exec_role"
+}
+
+## 6. Eliminar Program.cs
+
+## 7. Crear archivo Function.cs
+
+## 8. Agregar al proyecto solucion desde la raiz del proyecto
+```
+  dotnet sln add src/Lambdas/CreateInvitadoLambda/CreateInvitadoLambda.csproj
+```
+## 9. Instalar globalmente el amazon lambda Tools para probar, ejecutar en un cmd global
+```
+  dotnet tool install -g Amazon.Lambda.Tools
+  dotnet tool install -g Amazon.Lambda.TestTool-8.0 --version 0.16.2
+```
+
+## 10. Cambiar en el .csproj de
+<OutputType>Exe</OutputType>  a <OutputType>Library</OutputType> 
+
+## 11. Probar Test Lambda
+cd src/Lambdas/CreateInvitadoLambda
+```
+  dotnet build
+  dotnet-lambda-test-tool-8.0
+```
+
+## 12. Payload
+
+{
+  "name": "dany",
+  "lastame": "flores",
+  "email": "dflores@acity.com.pe",
+  "phone": "994157568",
+  "userCreated": "dflores",
+  "applicationName": "localhost"
+},
+{
+  "name": "roberto",
+  "lastame": "gomez",
+  "email": "ggomez@acity.com.pe",
+  "phone": "998565258",
+  "userCreated": "dflores",
+  "applicationName": "localhost"
+}

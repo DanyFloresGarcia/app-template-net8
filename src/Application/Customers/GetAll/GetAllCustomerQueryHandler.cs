@@ -5,11 +5,12 @@ using MediatR;
 using Domain.Customers.Interfaces;
 using Domain.Customers;
 using Application.Common.Mappings;
+using Application.Common;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Customers.GetAll;
 
-internal sealed class GetAllCustomerQueryHandler : IRequestHandler<GetAllCustomerQuery, ErrorOr<IReadOnlyList<CustomerDto>>>
+internal sealed class GetAllCustomerQueryHandler : IRequestHandler<GetAllCustomerQuery, ErrorOr<PaginatedResponse<CustomerDto>>>
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly ILogger<GetAllCustomerQueryHandler> _logger;
@@ -21,14 +22,23 @@ internal sealed class GetAllCustomerQueryHandler : IRequestHandler<GetAllCustome
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<IReadOnlyList<CustomerDto>>> Handle(GetAllCustomerQuery query, CancellationToken cancellationToken)
+    public async Task<ErrorOr<PaginatedResponse<CustomerDto>>> Handle(GetAllCustomerQuery query, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Handling GetAllCustomerQuery");
-        IEnumerable<Customer> customers = await _customerRepository.GetAllAsync();
+
+        // Llama al nuevo método con paginación
+        var (customers, totalCount) = await _customerRepository
+            .GetPagedAsync(query.Page, query.Size, cancellationToken);
 
         var customerDtos = _mapper.Map<List<CustomerDto>>(customers);
 
         _logger.LogInformation("OK - Successfully fetched all customers");
-        return customerDtos.AsReadOnly();
+
+        return new PaginatedResponse<CustomerDto>(
+            customerDtos,
+            query.Page,
+            query.Size,
+            totalCount
+        );
     }
 }

@@ -70,4 +70,9 @@ public class CustomerRepositoryDapper : ICustomerRepository
         using var connection = _context.CreateConnection();
         await connection.ExecuteAsync(sql, new { Id = id });
     }
+
+    public Task<(List<Customer> Items, int TotalCount)> GetPagedAsync(int page, int size, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }
