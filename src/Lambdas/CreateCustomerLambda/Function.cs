@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
-namespace CreateInvitadoLambda;
+namespace CreateCustomerLambda;
 
 public class Function
 {
@@ -45,7 +45,6 @@ public class Function
 
 	public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context)
 	{
-		context.Logger.LogLine("🟢 Iniciando Lambda");
 		LogToFile("Iniciando Lambda");
 
 		try
@@ -68,7 +67,7 @@ public class Function
 				Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
 			};
 
-			LogToFile($"Resultado: {result.Value}");
+			LogToFile($"Nuevo cliente: {result.Value}");
 
 			return response;
 		}

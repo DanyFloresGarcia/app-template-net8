@@ -7,9 +7,9 @@
   "configuration": "Release",
   "framework": "net8.0",
   "function-runtime": "dotnet8",
-  "function-handler": "CreateInvitadoLambda::CreateInvitadoLambda.Function::FunctionHandler",
-  "function-name": "CreateInvitadoLambda",
-  "function-description": "Lambda de creación de invitados",
+  "function-handler": "CreateCustomerLambda::CreateCustomerLambda.Function::FunctionHandler",
+  "function-name": "CreateCustomerLambda",
+  "function-description": "Lambda de creación de Customers",
   "function-timeout": 30,
   "function-memory-size": 256
 }

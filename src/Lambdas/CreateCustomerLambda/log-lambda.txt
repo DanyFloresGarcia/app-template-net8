@@ -198,3 +198,15 @@
 [19:01:23] Respuesta de CQRS.
 [19:01:23] Resultado: 6
 [19:01:23] Response: 6
+[22:21:41] Iniciando Lambda
+[22:21:41] Request Body: { "name": "toño", "lastame": "vargas", "email": "tvargas@acity.com.pe", "phone": "935742256", "userCreated": "dflores", "applicationName": "localhost" }
+[22:21:41] Deserialización completada.
+[22:21:41] Enviar mensaje CQRS.
+[22:21:46] Respuesta de CQRS.
+[22:21:46] Resultado: 7
+[01:22:20] Iniciando Lambda
+[01:22:20] Request Body: { "name": "marina", "lastame": "padilla", "email": "mpadilla@acity.com.pe", "phone": "935742656", "userCreated": "dflores", "applicationName": "localhost" }
+[01:22:20] Deserialización completada.
+[01:22:20] Enviar mensaje CQRS.
+[01:22:25] Respuesta de CQRS.
+[01:22:25] Nuevo cliente: 8

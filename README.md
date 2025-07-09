@@ -294,3 +294,24 @@ dotnet add package Amazon.Lambda.RuntimeSupport
   "path": "/",
   "queryStringParameters": null
 }
+{
+  "body": "{ \"name\": \"toño\", \"lastame\": \"vargas\", \"email\": \"tvargas@acity.com.pe\", \"phone\": \"935742256\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}
+
+{
+  "body": "{ \"name\": \"marina\", \"lastame\": \"padilla\", \"email\": \"mpadilla@acity.com.pe\", \"phone\": \"935742656\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}
