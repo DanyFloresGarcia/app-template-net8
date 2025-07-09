@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "LambdaLocalDebug": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "lambda-test-tool-8.0",
+      "workingDirectory": "$(ProjectDir)",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

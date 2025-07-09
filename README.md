@@ -215,7 +215,10 @@ cd src/Lambdas/CreateInvitadoLambda
   dotnet-lambda-test-tool-8.0
 ```
 
-## 12. Payload
+## 12. Agregar referencia en la lambda
+dotnet add package Amazon.Lambda.RuntimeSupport
+
+## 13. Payload
 
 {
   "name": "dany",
@@ -232,4 +235,62 @@ cd src/Lambdas/CreateInvitadoLambda
   "phone": "998565258",
   "userCreated": "dflores",
   "applicationName": "localhost"
+}
+
+
+## Payload Pruebas Lambda
+
+{
+  "body": "{ \"name\": \"roberto\", \"lastame\": \"gomez\", \"email\": \"ggomez@acity.com.pe\", \"phone\": \"998565258\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}
+
+{
+  "body": "{ \"name\": \"cris\", \"lastame\": \"martinez\", \"email\": \"cmartinez@acity.com.pe\", \"phone\": \"995745258\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}
+
+{
+  "body": "{ \"name\": \"sofia\", \"lastame\": \"nieto\", \"email\": \"snieto@acity.com.pe\", \"phone\": \"995745855\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}
+
+{
+  "body": "{ \"name\": \"victor\", \"lastame\": \"poma\", \"email\": \"vpoma@acity.com.pe\", \"phone\": \"975742856\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}
+
+{
+  "body": "{ \"name\": \"raul\", \"lastame\": \"cucurella\", \"email\": \"rcucurella@acity.com.pe\", \"phone\": \"975742256\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
 }

@@ -1,62 +1,93 @@
 using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
 using Microsoft.Extensions.DependencyInjection;
-using Application; // Asegúrate que este namespace es correcto
-using Infrastructure; // Asegúrate que este namespace es correcto
+using Application;
+using Infrastructure; 
 using MediatR;
-using System.Text.Json;
+using Newtonsoft.Json;
 using Application.Customers.Create;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
-// Requerido por Lambda
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
+[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
 namespace CreateInvitadoLambda;
 
 public class Function
 {
-    private readonly IServiceProvider _serviceProvider;
+	private readonly IServiceProvider _serviceProvider;
+	private readonly IConfiguration _configuration;
 
-    public Function()
-    {
-        var services = new ServiceCollection();
-        
-        // Registrar Application, Infrastructure, etc.
-        services.AddApplication();
-        //services.AddInfrastructure(); // si es necesario
+	public Function()
+	{
+		var services = new ServiceCollection();
 
-        _serviceProvider = services.BuildServiceProvider();
-    }
+		services.AddLogging(config =>
+		{
+			config.AddConsole();
+		});
 
-    public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context)
-    {
-        try
-        {
-            var mediator = _serviceProvider.GetRequiredService<IMediator>();
 
-            // Suponiendo que estás enviando un CreateInvitadoCommand como JSON en el body
-            var command = JsonSerializer.Deserialize<CreateCustomerCommand>(request.Body, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+		var builder = new ConfigurationBuilder()
+			.SetBasePath(Directory.GetCurrentDirectory())
+			.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+			.AddEnvironmentVariables();
 
-            var result = await mediator.Send(command!);
+		_configuration = builder.Build();
 
-            return new APIGatewayProxyResponse
-            {
-                StatusCode = 200,
-                Body = JsonSerializer.Serialize(result),
-                Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
-            };
-        }
-        catch (Exception ex)
-        {
-            context.Logger.LogError($"Error: {ex.Message}");
 
-            return new APIGatewayProxyResponse
-            {
-                StatusCode = 500,
-                Body = $"Error interno: {ex.Message}"
-            };
-        }
-    }
+		services.AddSingleton<IConfiguration>(_configuration);
+		services.AddApplication();
+		services.AddInfrastructure(_configuration);
+
+		_serviceProvider = services.BuildServiceProvider();
+	}
+
+	public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context)
+	{
+		context.Logger.LogLine("🟢 Iniciando Lambda");
+		LogToFile("Iniciando Lambda");
+
+		try
+		{
+			LogToFile($"Request Body: {request.Body}");
+			var mediator = _serviceProvider.GetRequiredService<IMediator>();
+			var command = JsonConvert.DeserializeObject<CreateCustomerCommand>(request.Body);
+
+			LogToFile("Deserialización completada."); 
+
+			LogToFile("Enviar mensaje CQRS.");
+			var result = await mediator.Send(command!);
+
+			LogToFile("Respuesta de CQRS.");
+
+			var response = new APIGatewayProxyResponse
+			{
+				StatusCode = 201,
+				Body = result.Value.ToString(),
+				Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
+			};
+
+			LogToFile($"Resultado: {result.Value}");
+
+			return response;
+		}
+		catch (Exception ex)
+		{
+			LogToFile($"Error: {ex.Message}");
+			LogToFile($"StackTrace: {ex.StackTrace}");
+
+			return new APIGatewayProxyResponse
+			{
+				StatusCode = 500,
+				Body = $"Error interno: {ex.Message}"
+			};
+		}
+	}
+
+	private void LogToFile(string message)
+	{
+		var logPath = Path.Combine(Directory.GetCurrentDirectory(), "log-lambda.txt");
+		File.AppendAllText(logPath, $"[{DateTime.Now:HH:mm:ss}] {message}{Environment.NewLine}");
+	}
 }

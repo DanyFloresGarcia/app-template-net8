@@ -1,0 +1,200 @@
+[18:15:00] Iniciando Lambda
+[18:15:00] Request Body: 
+[18:15:00] Error: Value cannot be null. (Parameter 'value')
+[18:15:00] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:15:57] Iniciando Lambda
+[18:15:57] Request Body: 
+[18:15:57] Error: Value cannot be null. (Parameter 'value')
+[18:15:57] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:15:57] Iniciando Lambda
+[18:15:57] Request Body: 
+[18:15:57] Error: Value cannot be null. (Parameter 'value')
+[18:15:57] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:15:57] Iniciando Lambda
+[18:15:57] Request Body: 
+[18:15:57] Error: Value cannot be null. (Parameter 'value')
+[18:15:57] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:15:58] Iniciando Lambda
+[18:15:58] Request Body: 
+[18:15:58] Error: Value cannot be null. (Parameter 'value')
+[18:15:58] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:15:58] Iniciando Lambda
+[18:15:58] Request Body: 
+[18:15:58] Error: Value cannot be null. (Parameter 'value')
+[18:15:58] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:15:58] Iniciando Lambda
+[18:15:58] Request Body: 
+[18:15:58] Error: Value cannot be null. (Parameter 'value')
+[18:15:58] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:16:01] Iniciando Lambda
+[18:16:01] Request Body: 
+[18:16:01] Error: Value cannot be null. (Parameter 'value')
+[18:16:01] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:16:04] Iniciando Lambda
+[18:16:04] Request Body: 
+[18:16:04] Error: Value cannot be null. (Parameter 'value')
+[18:16:04] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:16:40] Iniciando Lambda
+[18:16:40] Request Body: 
+[18:16:40] Error: Value cannot be null. (Parameter 'value')
+[18:16:40] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:16:54] Iniciando Lambda
+[18:16:54] Request Body: 
+[18:16:54] Error: Value cannot be null. (Parameter 'value')
+[18:16:54] StackTrace:    at Newtonsoft.Json.Utilities.ValidationUtils.ArgumentNotNull(Object value, String parameterName)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 41
+[18:18:02] Iniciando Lambda
+[18:18:02] Request Body: { "name": "roberto", "lastame": "gomez", "email": "ggomez@acity.com.pe", "phone": "998565258", "userCreated": "dflores", "applicationName": "localhost" }
+[18:18:02] Deserialización completada.
+[18:18:02] Error: Unable to resolve service for type 'Domain.Customers.Interfaces.ICustomerRepository' while attempting to activate 'Application.Customers.Create.CreateCustomerCommandHandler'.
+[18:18:02] StackTrace:    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`2.<>c__DisplayClass1_0.<Handle>g__Handler|0(CancellationToken t)
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Application\Common\Behaviors\ValidationBehaviors.cs:line 32
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 44
+[18:42:28] Iniciando Lambda
+[18:42:28] Request Body: { "name": "roberto", "lastame": "gomez", "email": "ggomez@acity.com.pe", "phone": "998565258", "userCreated": "dflores", "applicationName": "localhost" }
+[18:42:28] Deserialización completada.
+[18:42:28] Error: Unable to resolve service for type 'Microsoft.Extensions.Logging.ILogger`1[Application.Customers.Create.CreateCustomerCommandHandler]' while attempting to activate 'Application.Customers.Create.CreateCustomerCommandHandler'.
+[18:42:28] StackTrace:    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`2.<>c__DisplayClass1_0.<Handle>g__Handler|0(CancellationToken t)
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Application\Common\Behaviors\ValidationBehaviors.cs:line 32
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 53
+[18:47:34] Iniciando Lambda
+[18:47:34] Request Body: { "name": "roberto", "lastame": "gomez", "email": "ggomez@acity.com.pe", "phone": "998565258", "userCreated": "dflores", "applicationName": "localhost" }
+[18:47:34] Deserialización completada.
+[18:47:34] Error: Unable to resolve service for type 'Microsoft.Extensions.Logging.ILogger`1[Application.Customers.Create.CreateCustomerCommandHandler]' while attempting to activate 'Application.Customers.Create.CreateCustomerCommandHandler'.
+[18:47:34] StackTrace:    at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, ServiceIdentifier serviceIdentifier, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceIdentifier serviceIdentifier, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`2.<>c__DisplayClass1_0.<Handle>g__Handler|0(CancellationToken t)
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Application\Common\Behaviors\ValidationBehaviors.cs:line 32
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 53
+[18:49:24] Iniciando Lambda
+[18:49:24] Request Body: { "name": "roberto", "lastame": "gomez", "email": "ggomez@acity.com.pe", "phone": "998565258", "userCreated": "dflores", "applicationName": "localhost" }
+[18:49:24] Deserialización completada.
+[18:49:24] Request Body Name: roberto
+[18:49:24] Request Body Lastame: gomez
+[18:49:24] Request Body Email: ggomez@acity.com.pe
+[18:49:24] Request Body Phone: 998565258
+[18:49:24] Enviar mensaje CQRS.
+[18:49:29] Respuesta de CQRS.
+[18:49:29] Error: Unsupported type: ErrorOr.ErrorOr`1[System.Int32]. Use the JsonSerializer class to get the object's JSON representation.
+[18:49:29] StackTrace:    at Newtonsoft.Json.JsonConvert.ToString(Object value)
+   at CreateInvitadoLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateInvitadoLambda\Function.cs:line 71
+[18:52:56] Iniciando Lambda
+[18:52:56] Request Body: { "name": "cris", "lastame": "martinez", "email": "cmartinez@acity.com.pe", "phone": "995745258", "userCreated": "dflores", "applicationName": "localhost" }
+[18:52:56] Deserialización completada.
+[18:52:56] Request Body Name: cris
+[18:52:56] Request Body Lastame: martinez
+[18:52:56] Request Body Email: cmartinez@acity.com.pe
+[18:52:56] Request Body Phone: 995745258
+[18:52:56] Enviar mensaje CQRS.
+[18:53:01] Respuesta de CQRS.
+[18:53:01] Resultado: 3
+[18:56:14] Iniciando Lambda
+[18:56:14] Request Body: { "name": "sofia", "lastame": "nieto", "email": "snieto@acity.com.pe", "phone": "995745855", "userCreated": "dflores", "applicationName": "localhost" }
+[18:56:14] Deserialización completada.
+[18:56:14] Request Body Name: sofia
+[18:56:14] Request Body Lastame: nieto
+[18:56:14] Request Body Email: snieto@acity.com.pe
+[18:56:14] Request Body Phone: 995745855
+[18:56:14] Enviar mensaje CQRS.
+[18:56:21] Respuesta de CQRS.
+[18:56:21] Resultado: 4
+[18:56:21] Response: Amazon.Lambda.APIGatewayEvents.APIGatewayProxyResponse
+[18:58:35] Iniciando Lambda
+[18:58:35] Request Body: { "name": "victor", "lastame": "poma", "email": "vpoma@acity.com.pe", "phone": "975742856", "userCreated": "dflores", "applicationName": "localhost" }
+[18:58:35] Deserialización completada.
+[18:58:35] Request Body Name: victor
+[18:58:35] Request Body Lastame: poma
+[18:58:35] Request Body Email: vpoma@acity.com.pe
+[18:58:35] Request Body Phone: 975742856
+[18:58:35] Enviar mensaje CQRS.
+[18:58:38] Respuesta de CQRS.
+[18:58:38] Resultado: 5
+[18:58:38] Response: Amazon.Lambda.APIGatewayEvents.APIGatewayProxyResponse
+[19:01:19] Iniciando Lambda
+[19:01:19] Request Body: { "name": "raul", "lastame": "cucurella", "email": "rcucurella@acity.com.pe", "phone": "975742256", "userCreated": "dflores", "applicationName": "localhost" }
+[19:01:19] Deserialización completada.
+[19:01:19] Request Body Name: raul
+[19:01:19] Request Body Lastame: cucurella
+[19:01:19] Request Body Email: rcucurella@acity.com.pe
+[19:01:19] Request Body Phone: 975742256
+[19:01:19] Enviar mensaje CQRS.
+[19:01:23] Respuesta de CQRS.
+[19:01:23] Resultado: 6
+[19:01:23] Response: 6
