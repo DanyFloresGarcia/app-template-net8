@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using Application.Customers.Create;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Helpers;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
@@ -20,13 +22,11 @@ public class Function
 
 	public Function()
 	{
-		var services = new ServiceCollection();
-
-		services.AddLogging(config =>
-		{
-			config.AddConsole();
-		});
-
+		Log.Logger = new LoggerConfiguration()
+		.MinimumLevel.Information()
+		.Enrich.FromLogContext()
+		.WriteTo.Console()
+		.CreateLogger();
 
 		var builder = new ConfigurationBuilder()
 			.SetBasePath(Directory.GetCurrentDirectory())
@@ -34,7 +34,13 @@ public class Function
 			.AddEnvironmentVariables();
 
 		_configuration = builder.Build();
-
+		var services = new ServiceCollection();
+ 
+		services.AddLogging(logging =>
+		{
+			logging.ClearProviders();
+			logging.AddSerilog(dispose: true);
+		});
 
 		services.AddSingleton<IConfiguration>(_configuration);
 		services.AddApplication();
@@ -51,25 +57,19 @@ public class Function
 		{
 			LogToFile($"Request Body: {request.Body}");
 			var mediator = _serviceProvider.GetRequiredService<IMediator>();
-			var command = JsonConvert.DeserializeObject<CreateCustomerCommand>(request.Body);
 
-			LogToFile("Deserialización completada."); 
+			LogToFile("Deserialización completada.");
+			var command = JsonConvert.DeserializeObject<CreateCustomerCommand>(request.Body);
 
 			LogToFile("Enviar mensaje CQRS.");
 			var result = await mediator.Send(command!);
+	
+			LogToFile("Mensaje CQRS enviado.");
 
-			LogToFile("Respuesta de CQRS.");
-
-			var response = new APIGatewayProxyResponse
-			{
-				StatusCode = 201,
-				Body = result.Value.ToString(),
-				Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
-			};
-
-			LogToFile($"Nuevo cliente: {result.Value}");
-
-			return response;
+			return result.Match(
+				customerId => LambdaResponse.Success(new { CustomerId = customerId }, 201),
+				errors => LambdaResponse.Error(errors)
+			);
 		}
 		catch (Exception ex)
 		{
@@ -81,12 +81,26 @@ public class Function
 				StatusCode = 500,
 				Body = $"Error interno: {ex.Message}"
 			};
+		}finally
+		{
+			Log.CloseAndFlush();
 		}
 	}
 
 	private void LogToFile(string message)
 	{
-		var logPath = Path.Combine(Directory.GetCurrentDirectory(), "log-lambda.txt");
-		File.AppendAllText(logPath, $"[{DateTime.Now:HH:mm:ss}] {message}{Environment.NewLine}");
-	}
+		var environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
+
+		Console.WriteLine($"Environment: {environment}");
+
+		if (environment == "Development")
+		{
+			var logPath = Path.Combine(Directory.GetCurrentDirectory(), "log-lambda.txt");
+			File.AppendAllText(logPath, $"[{DateTime.Now:HH:mm:ss}] {message}{Environment.NewLine}");
+		}
+		else
+		{
+			Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {message}");
+		}
+	} 
 }

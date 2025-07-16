@@ -216,27 +216,9 @@ cd src/Lambdas/CreateInvitadoLambda
 ```
 
 ## 12. Agregar referencia en la lambda
+```
 dotnet add package Amazon.Lambda.RuntimeSupport
-
-## 13. Payload
-
-{
-  "name": "dany",
-  "lastame": "flores",
-  "email": "dflores@acity.com.pe",
-  "phone": "994157568",
-  "userCreated": "dflores",
-  "applicationName": "localhost"
-},
-{
-  "name": "roberto",
-  "lastame": "gomez",
-  "email": "ggomez@acity.com.pe",
-  "phone": "998565258",
-  "userCreated": "dflores",
-  "applicationName": "localhost"
-}
-
+```
 
 ## Payload Pruebas Lambda
 
@@ -251,67 +233,15 @@ dotnet add package Amazon.Lambda.RuntimeSupport
   "queryStringParameters": null
 }
 
-{
-  "body": "{ \"name\": \"cris\", \"lastame\": \"martinez\", \"email\": \"cmartinez@acity.com.pe\", \"phone\": \"995745258\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
-  "httpMethod": "POST",
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "isBase64Encoded": false,
-  "path": "/",
-  "queryStringParameters": null
-}
+# Desplegar en AWS
 
-{
-  "body": "{ \"name\": \"sofia\", \"lastame\": \"nieto\", \"email\": \"snieto@acity.com.pe\", \"phone\": \"995745855\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
-  "httpMethod": "POST",
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "isBase64Encoded": false,
-  "path": "/",
-  "queryStringParameters": null
-}
 
-{
-  "body": "{ \"name\": \"victor\", \"lastame\": \"poma\", \"email\": \"vpoma@acity.com.pe\", \"phone\": \"975742856\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
-  "httpMethod": "POST",
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "isBase64Encoded": false,
-  "path": "/",
-  "queryStringParameters": null
-}
+## Generar compilado en modo release
+```
+dotnet publish -c Release -o ./publish
+```
 
-{
-  "body": "{ \"name\": \"raul\", \"lastame\": \"cucurella\", \"email\": \"rcucurella@acity.com.pe\", \"phone\": \"975742256\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
-  "httpMethod": "POST",
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "isBase64Encoded": false,
-  "path": "/",
-  "queryStringParameters": null
-}
-{
-  "body": "{ \"name\": \"toño\", \"lastame\": \"vargas\", \"email\": \"tvargas@acity.com.pe\", \"phone\": \"935742256\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
-  "httpMethod": "POST",
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "isBase64Encoded": false,
-  "path": "/",
-  "queryStringParameters": null
-}
-
-{
-  "body": "{ \"name\": \"marina\", \"lastame\": \"padilla\", \"email\": \"mpadilla@acity.com.pe\", \"phone\": \"935742656\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
-  "httpMethod": "POST",
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "isBase64Encoded": false,
-  "path": "/",
-  "queryStringParameters": null
-}
+## Comprimir el compilado en .zip
+```
+Compress-Archive -Path * -DestinationPath ../lambda.zip
+```

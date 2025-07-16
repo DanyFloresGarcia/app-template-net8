@@ -210,3 +210,61 @@
 [01:22:20] Enviar mensaje CQRS.
 [01:22:25] Respuesta de CQRS.
 [01:22:25] Nuevo cliente: 8
+[10:19:49] Iniciando Lambda
+[10:19:49] Request Body: { "name": "james", "lastame": "capcha", "email": "jcapcha@acity.com.pe", "phone": "935742356", "userCreated": "dflores", "applicationName": "localhost" }
+[10:19:49] Deserialización completada.
+[10:19:49] Enviar mensaje CQRS.
+[10:20:05] Error: Exception while reading from stream
+[10:20:05] StackTrace:    at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|55_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransactionAsync(IsolationLevel isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.BeginTransactionAsync(CancellationToken cancellationToken)
+   at Infrastructure.Persistence.ApplicationDbContext.BeginTransactionAsync(CancellationToken cancellationToken) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Infrastructure\Persistence\ApplicationDbContext.cs:line 47
+   at Application.Customers.Create.CreateCustomerCommandHandler.Handle(CreateCustomerCommand command, CancellationToken cancellationToken) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Application\Customers\Create\CreateCustomerCommandHandler.cs:line 33
+   at Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Application\Common\Behaviors\ValidationBehaviors.cs:line 32
+   at CreateCustomerLambda.Function.FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context) in D:\DANY\proyecto-personal\backend\app-template-net8\src\Lambdas\CreateCustomerLambda\Function.cs:line 59
+[10:28:29] Iniciando Lambda
+[10:28:29] Request Body: { "name": "james", "lastame": "capcha", "email": "jcapcha@acity.com.pe", "phone": "935742356", "userCreated": "dflores", "applicationName": "localhost" }
+[10:28:29] Deserialización completada.
+[10:28:29] Enviar mensaje CQRS.
+[10:28:34] Respuesta de CQRS.
+[10:28:34] Nuevo cliente: 9
+[10:41:32] Iniciando Lambda
+[10:41:32] Request Body: { "name": "jack", "lastame": "aguilar", "email": "jaguilar@acity.com.pe", "phone": "935342356", "userCreated": "dflores", "applicationName": "localhost" }
+[10:41:32] Deserialización completada.
+[10:41:32] Enviar mensaje CQRS.
+[10:41:35] Respuesta de CQRS.
+[10:41:35] Nuevo cliente: 10
+[12:10:34] Iniciando Lambda
+[12:10:34] Request Body: { "name": "ronald", "lastame": "terrones", "email": "rterrones@acity.com.pe", "phone": "935712356", "userCreated": "dflores", "applicationName": "localhost" }
+[12:10:34] Deserialización completada.
+[12:10:34] Enviar mensaje CQRS.
+[12:10:41] Respuesta de CQRS.
+[12:10:41] Nuevo cliente: 11
+[20:33:45] Iniciando Lambda
+[20:33:45] Request Body: { "name": "leo", "lastame": "lara", "email": "llara@acity.com.pe", "phone": "935412356", "userCreated": "dflores", "applicationName": "localhost" }
+[20:33:45] Deserialización completada.
+[20:33:45] Enviar mensaje CQRS.
+[20:33:52] Respuesta de CQRS.
+[20:33:52] Nuevo cliente: 12
+[23:53:19] Iniciando Lambda
+[23:53:19] Request Body: { "name": "pedro", "lastame": "salinas", "email": "psalinas@acity.com.pe", "phone": "998865258", "userCreated": "dflores", "applicationName": "localhost" }
+[23:53:19] Deserialización completada.
+[23:53:19] Enviar mensaje CQRS.
+[23:53:23] Respuesta de CQRS.
+[23:53:23] Nuevo cliente: 14
+[23:55:17] Iniciando Lambda
+[23:55:17] Request Body: { "name": "mercedes", "lastame": "perez", "email": "mperez@acity.com.pe", "phone": "998565238", "userCreated": "dflores", "applicationName": "localhost" }
+[23:55:17] Deserialización completada.
+[23:55:17] Enviar mensaje CQRS.
+[23:55:21] Respuesta de CQRS.
+[23:55:21] Nuevo cliente: 15

@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "src\API\API.csproj",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lambdas", "Lambdas", "{E09F1730-CDA3-447A-BEB8-5A75030E3A59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateInvitadoLambda", "src\Lambdas\CreateInvitadoLambda\CreateInvitadoLambda.csproj", "{99DE72B1-5981-4417-8919-C4A05DD5206F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateCustomerLambda", "src\Lambdas\CreateCustomerLambda\CreateCustomerLambda.csproj", "{99DE72B1-5981-4417-8919-C4A05DD5206F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
