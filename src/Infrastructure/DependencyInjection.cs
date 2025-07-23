@@ -25,8 +25,8 @@ public static class DependencyInjection
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
                 var databaseSettings = configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>()!;
-                Console.WriteLine(databaseSettings.Provider);
-                Console.WriteLine(databaseSettings.ConnectionString);
+                Console.WriteLine("Tipo Base datos:" + databaseSettings.Provider);
+                Console.WriteLine("Cadena de conexión:" + databaseSettings.ConnectionString);
                 switch (databaseSettings.Provider)
                 {
                         case DatabaseProvider.SqlServer:

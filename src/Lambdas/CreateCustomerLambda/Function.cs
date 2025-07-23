@@ -55,6 +55,7 @@ public class Function
 
 		try
 		{
+			LogToFile($"All Request: {request}");
 			LogToFile($"Request Body: {request.Body}");
 			var mediator = _serviceProvider.GetRequiredService<IMediator>();
 
