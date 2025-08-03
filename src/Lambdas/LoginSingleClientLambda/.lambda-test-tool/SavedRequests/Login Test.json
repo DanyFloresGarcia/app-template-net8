@@ -1,0 +1,10 @@
+{
+  "body": "{ \"username\": \"test\", \"password\": \"Test123$\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}

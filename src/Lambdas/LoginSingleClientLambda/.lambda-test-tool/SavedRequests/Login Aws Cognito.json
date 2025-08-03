@@ -1,0 +1,10 @@
+{
+  "body": "{ \"username\": \"daflores\", \"password\": \"DFGServer181296$$\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}

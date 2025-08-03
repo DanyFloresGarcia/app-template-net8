@@ -1,5 +1,3 @@
-namespace Application.Customers.Create;
-
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +9,8 @@ using Domain.Primitives;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
 using ErrorOr;
+
+namespace Application.Customers.Create;
 
 public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, ErrorOr<int>>
 {

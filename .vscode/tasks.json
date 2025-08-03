@@ -1,20 +1,20 @@
-{
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "dotnet",
-			"task": "watch API",
-			"file": "/workspaces/app-template-net8/src/API/API.csproj",
-			"problemMatcher": [],
-			"label": "dotnet: watch API"
-		}
-		,
-		{
-			"type": "dotnet",
-			"task": "watch API",
-			"file": "C:\\Dany\\Portafolio\\v1\\app-template-net8\\src\\API\\API.csproj",
-			"problemMatcher": [],
-			"label": "dotnet: watch API"
-		}
-	]
-}
+// {
+// 	"version": "2.0.0",
+// 	"tasks": [
+// 		{
+// 			"type": "dotnet",
+// 			"task": "watch API",
+// 			"file": "/workspaces/app-template-net8/src/API/API.csproj",
+// 			"problemMatcher": [],
+// 			"label": "dotnet: watch API"
+// 		}
+// 		,
+// 		{
+// 			"type": "dotnet",
+// 			"task": "watch API",
+// 			"file": "C:\\Dany\\Portafolio\\v1\\app-template-net8\\src\\API\\API.csproj",
+// 			"problemMatcher": [],
+// 			"label": "dotnet: watch API"
+// 		}
+// 	]
+// }

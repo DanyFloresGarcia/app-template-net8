@@ -1,12 +1,12 @@
 namespace Application.Common;
 
-public class PaginatedResponse<T>
+public record PaginatedResponse<T>
 {
-    public IEnumerable<T> Items { get; set; } = [];
-    public int Page { get; set; }
-    public int Size { get; set; }
-    public int TotalItems { get; set; }
-    
+    public IEnumerable<T> Items { get; init; } = Enumerable.Empty<T>();
+    public int Page { get; init; }
+    public int Size { get; init; }
+    public int TotalItems { get; init; }
+
     public PaginatedResponse(IEnumerable<T> items, int page, int size, int totalItems)
     {
         Items = items;

@@ -11,6 +11,8 @@ using Infrastructure.Persistence.Repositories;
 using Infrastructure.Common;
 using System.Data;
 using Oracle.ManagedDataAccess.Client;
+using Infrastructure.Providers;
+using Aplication.Data;
 
 namespace Infrastructure;
 
@@ -55,9 +57,10 @@ public static class DependencyInjection
 
                 //Domain
                 //Services
+                services.AddScoped<ILoginService, CognitoAuthProvider>(); 
 
                 //Singleton
-                //services.AddSingleton<IVaultCredentialsProvider, VaultCredentialsProvider>();
+                services.AddSingleton<ICredentialsProvider, CredentialsProvider>(); 
 
                 //services.AddTransient<SomeApplication>();
 
