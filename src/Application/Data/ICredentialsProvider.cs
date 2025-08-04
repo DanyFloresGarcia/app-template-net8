@@ -1,4 +1,4 @@
-using Application.Auth.Dtos;
+using Application.Auth.Params;
 
 namespace Application.Data;
 public interface ICredentialsProvider

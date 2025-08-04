@@ -1,5 +1,5 @@
 using Application.Auth.Dtos;
-namespace Aplication.Data;
+namespace Application.Data;
 public interface ILoginService
 {
     Task<LoginResponse> LoginAsync(string userName, string password);

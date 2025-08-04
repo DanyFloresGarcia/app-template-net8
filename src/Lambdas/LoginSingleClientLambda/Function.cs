@@ -58,16 +58,16 @@ public class Function
     {
         try
 		{
-			_logger.LogInformation($"Request Body: {request.Body}");
+			_logger.LogInformation($"Request Body: {request.Body}\n");
 			var mediator = _serviceProvider.GetRequiredService<IMediator>();
 
-			_logger.LogInformation("Deserialización completada.");
+			_logger.LogInformation("Deserialización completada.\n");
 			var command = JsonConvert.DeserializeObject<LoginCommand>(request.Body);
 
-			_logger.LogInformation("Enviando mensaje CQRS.");
+			_logger.LogInformation("Enviando mensaje CQRS.\n");
 			var result = await mediator.Send(command!);
 
-			_logger.LogInformation("Recibiendo respuesta CQRS.");
+			_logger.LogInformation("Recibiendo respuesta CQRS.\n");
 
 			return result.Match(
 				userId => LambdaResponse.Success(new { UserId = userId }, 201),

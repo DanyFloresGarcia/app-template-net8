@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Aplication.Data;
+using Application.Data;
 using Domain.Primitives;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
@@ -25,7 +25,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<LoginRe
     {
         using (LogContext.PushProperty("Identifier", string.Concat("Login: " + string.Concat(command.UserName, " ", command.Password))))
         {
-            _logger.LogInformation("Iniciando Login para el usuario: {UserName}", command.UserName);
+            _logger.LogInformation($"Iniciando Login para el usuario: {command.UserName}\n");
 
             try
             {
@@ -38,7 +38,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<LoginRe
                     );
                 }
 
-                _logger.LogInformation("Login successful for user: {UserName}", command.UserName);
+                _logger.LogInformation($"Login successful for user: {command.UserName}\n");
                 return response;
             }
             catch (Exception ex)

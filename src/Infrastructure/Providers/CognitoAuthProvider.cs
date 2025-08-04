@@ -1,27 +1,26 @@
-using Microsoft.EntityFrameworkCore;
-
 using Application.Auth.Dtos;
-using Aplication.Data;
+using Application.Data;
 using Microsoft.Extensions.Logging;
 using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
-using Application.Data;
+using Application.Auth.Params;
 
 namespace Infrastructure.Providers;
 
 public class CognitoAuthProvider(ICredentialsProvider credentialsProvider, ILogger<CognitoAuthProvider> logger) : ILoginService
 {
     private readonly ICredentialsProvider _credentialsProvider = credentialsProvider ?? throw new ArgumentNullException(nameof(credentialsProvider));
-    private readonly ILogger<CognitoAuthProvider> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    
+    private readonly ILogger<CognitoAuthProvider> _logger = logger ?? throw new ArgumentNullException(nameof(logger));    
 
     public async Task<LoginResponse> LoginAsync(string userName, string password)
     {
             // Crear cliente de Cognito
             var cognito = new AmazonCognitoIdentityProviderClient();
+            
+            LoginParam loginParam = _credentialsProvider.GetLoginParam();
 
-            string clientId = _credentialsProvider.GetLoginParam().ClientId;
-            string clientSecret = _credentialsProvider.GetLoginParam().ClientSecret;
+            string clientId = loginParam.ClientId;
+            string clientSecret = loginParam.ClientSecret;
 
             if (string.IsNullOrEmpty(clientId))
             {
@@ -34,7 +33,7 @@ public class CognitoAuthProvider(ICredentialsProvider credentialsProvider, ILogg
             // Preparar la solicitud de autenticación
             var authRequest = new InitiateAuthRequest
             {
-                AuthFlow = AuthFlowType.USER_PASSWORD_AUTH, // o USER_SRP_AUTH si configuras SRP
+                AuthFlow = AuthFlowType.USER_PASSWORD_AUTH,
                 ClientId = clientId,
                 AuthParameters = new Dictionary<string, string>
                 {
@@ -44,8 +43,6 @@ public class CognitoAuthProvider(ICredentialsProvider credentialsProvider, ILogg
                 }
             };
 
-            Console.WriteLine("COGNITO_CLIENT_ID: " + authRequest.ClientId);
-            
             // Llamar a Cognito
             var authResponse = await cognito.InitiateAuthAsync(authRequest);
 

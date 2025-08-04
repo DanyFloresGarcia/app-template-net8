@@ -8,11 +8,8 @@ using Application.Common.Mappings;
 using Application.Data;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
-using Infrastructure.Common;
-using System.Data;
-using Oracle.ManagedDataAccess.Client;
-using Infrastructure.Providers;
-using Aplication.Data;
+using Infrastructure.Common; 
+using Infrastructure.Providers; 
 
 namespace Infrastructure;
 
@@ -27,7 +24,10 @@ public static class DependencyInjection
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
                 var databaseSettings = configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>()!;
-                Console.WriteLine("Tipo Base datos:" + databaseSettings.Provider);
+                var loginCredentials = configuration.GetSection("LoginCredentials").Get<LoginCredentials>()!;
+                Console.WriteLine("LoginCredentials.ClientId:" + loginCredentials.ClientId);
+                services.AddSingleton(loginCredentials);
+                
                 Console.WriteLine("Cadena de conexión:" + databaseSettings.ConnectionString);
                 switch (databaseSettings.Provider)
                 {
@@ -54,13 +54,12 @@ public static class DependencyInjection
                 // services.AddScoped<IUnitOfWork>(sp =>
                 // sp.GetRequiredService<IApplicationDbContext>());
 
-
                 //Domain
                 //Services
                 services.AddScoped<ILoginService, CognitoAuthProvider>(); 
 
                 //Singleton
-                services.AddSingleton<ICredentialsProvider, CredentialsProvider>(); 
+                services.AddSingleton<ICredentialsProvider, CognitoCredentialsProvider>(); 
 
                 //services.AddTransient<SomeApplication>();
 
