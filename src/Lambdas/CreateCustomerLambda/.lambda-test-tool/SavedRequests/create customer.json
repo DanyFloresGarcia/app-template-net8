@@ -1,0 +1,10 @@
+{
+  "body": "{ \"name\": \"tamara\", \"lastame\": \"tomez\", \"email\": \"ggomez@acity.com.pe\", \"phone\": \"998565258\", \"userCreated\": \"dflores\", \"applicationName\": \"localhost\" }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/",
+  "queryStringParameters": null
+}

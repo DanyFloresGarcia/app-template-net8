@@ -27,6 +27,8 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
 
     public async Task<ErrorOr<int>> Handle(CreateCustomerCommand command, CancellationToken cancellationToken)
     {
+        _logger.LogWarning("Handler ejecutado en {Timestamp}. HashCode: {HashCode}", DateTime.UtcNow, this.GetHashCode());
+
         using (LogContext.PushProperty("Identifier", string.Concat("Create Customers: " + string.Concat(command.Name, " ", command.Lastame))))
         {
             _logger.LogInformation("Initial Creating customer");
@@ -39,6 +41,8 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 {
                     _logger.LogError("Audit record is null");
                     await _unitOfWork.RollbackTransactionAsync(cancellationToken);
+                    _unitOfWork.ClearChangeTracker();
+
                     throw new ArgumentNullException(nameof(auditRecord));
                 }
 
@@ -59,6 +63,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
                 string errorMessage = $"Error creating customer: {ex.Message}";
                 _logger.LogError(errorMessage);
                 await _unitOfWork.RollbackTransactionAsync(cancellationToken);
+                _unitOfWork.ClearChangeTracker();
 
                 return Error.Failure(
                     code: "Customer.Create.Failure",

@@ -27,4 +27,9 @@ public class DapperUnitOfWork : IUnitOfWork
     {
         return Task.CompletedTask;
     }
+
+    public void ClearChangeTracker()
+    {
+        // Dapper no tiene un ChangeTracker, así que este método no hace nada
+    }
 }

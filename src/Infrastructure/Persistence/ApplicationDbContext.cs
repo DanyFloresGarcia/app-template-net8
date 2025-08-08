@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 using Application.Data;
 using Domain.Primitives;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infrastructure.Persistence;
 
@@ -15,8 +16,17 @@ public abstract class ApplicationDbContext : DbContext, IUnitOfWork
     public ApplicationDbContext(DbContextOptions options, IPublisher publiser) : base(options)
     {
         _publiser = publiser ?? throw new ArgumentNullException(nameof(publiser));
+    } 
+
+    public void ClearChangeTracker()
+    {
+        ChangeTracker.Clear();  
     }
 
+    public IEnumerable<EntityEntry> GetTrackedEntries()
+    {
+        return ChangeTracker.Entries();
+    }
     protected abstract override void OnModelCreating(ModelBuilder modelBuilder);
     
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -35,6 +45,8 @@ public abstract class ApplicationDbContext : DbContext, IUnitOfWork
 
         return result;
     }
+
+
 
     // Metodos para manejar las transacciones
     public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)

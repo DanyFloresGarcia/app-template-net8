@@ -4,6 +4,7 @@ using Infrastructure.Persistence.Configuration.PostgreSql;
 
 using Domain.Customers;
 using Application.Data;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infrastructure.Persistence;
 
@@ -11,8 +12,10 @@ public class ApplicationDbContextPostgreSql : ApplicationDbContext, IApplication
 {
     public ApplicationDbContextPostgreSql(DbContextOptions<ApplicationDbContextPostgreSql> options, IPublisher publisher)
         : base(options, publisher) { }
+ 
 
     public DbSet<Customer> Customers { get; set; }
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

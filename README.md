@@ -241,7 +241,7 @@ echo $env:COGNITO_CLIENT_ID
   "path": "/",
   "queryStringParameters": null
 }
-
+## Login 
 {
   "body": "{ \"username\": \"daflores\", \"password\": \"DFGServer181296$$\" }",
   "httpMethod": "POST",
@@ -258,10 +258,28 @@ echo $env:COGNITO_CLIENT_ID
 
 ## Generar compilado en modo release
 ```
-dotnet publish -c Release -o ./publish
+dotnet publish -c Release -r linux-x64 --self-contained false -o ./publish
+ 
+
 ```
 
 ## Comprimir el compilado en .zip
 ```
-Compress-Archive -Path * -DestinationPath ../lambda.zip
+Compress-Archive -Path * -DestinationPath ../create-customer-lambda.zip
+Compress-Archive -Path * -DestinationPath ../create-customer-lambda-filtered.zip
+Compress-Archive -Path * -DestinationPath ../cliente-unico-layer-v2.zip
+Compress-Archive -Path * -DestinationPath ../create-customer-lambda-new.zip
+```
+
+# Desplegar Layer Capas Shared
+
+## Compilar capas
+```
+dotnet publish -c Release -o ./publish/layer src/Domain
+dotnet publish -c Release -o ./publish/layer src/Application
+dotnet publish -c Release -o ./publish/layer src/Infrastructure
+```
+## Ejecutar Script para generar zip para layer y lambda
+```
+..\script_generate_zip_lambda.ps1
 ```

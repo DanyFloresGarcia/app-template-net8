@@ -8,8 +8,8 @@ using Application.Common.Mappings;
 using Application.Data;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
-using Infrastructure.Common; 
-using Infrastructure.Providers; 
+using Infrastructure.Common;
+using Infrastructure.Providers;
 
 namespace Infrastructure;
 
@@ -25,9 +25,13 @@ public static class DependencyInjection
         {
                 var databaseSettings = configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>()!;
                 var loginCredentials = configuration.GetSection("LoginCredentials").Get<LoginCredentials>()!;
-                Console.WriteLine("LoginCredentials.ClientId:" + loginCredentials.ClientId);
-                services.AddSingleton(loginCredentials);
-                
+
+                if (loginCredentials is not null)
+                {
+                        Console.WriteLine("LoginCredentials.ClientId:" + loginCredentials.ClientId);
+                        services.AddSingleton(loginCredentials);
+                }
+
                 Console.WriteLine("Cadena de conexión:" + databaseSettings.ConnectionString);
                 switch (databaseSettings.Provider)
                 {
@@ -56,15 +60,16 @@ public static class DependencyInjection
 
                 //Domain
                 //Services
-                services.AddScoped<ILoginService, CognitoAuthProvider>(); 
+                services.AddScoped<ILoginService, CognitoAuthProvider>();
 
                 //Singleton
-                services.AddSingleton<ICredentialsProvider, CognitoCredentialsProvider>(); 
+                services.AddSingleton<ICredentialsProvider, CognitoCredentialsProvider>();
 
                 //services.AddTransient<SomeApplication>();
 
                 return services;
         }
+
 
         private static void AddDbContextSqlServer(IServiceCollection services, DatabaseSettings databaseSettings)
         {
@@ -72,7 +77,7 @@ public static class DependencyInjection
                                         options.UseSqlServer(databaseSettings.ConnectionString));
                 services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
                 services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContextSqlServer>());
-                
+
                 //Repository
                 services.AddScoped<ICustomerRepository, CustomerRepository>();
         }

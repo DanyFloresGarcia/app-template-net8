@@ -2,14 +2,14 @@ using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
 using Microsoft.Extensions.DependencyInjection;
 using Application;
-using Infrastructure; 
+using Infrastructure;
 using MediatR;
 using Newtonsoft.Json;
 using Application.Customers.Create;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Serilog;
 using Helpers;
+using System.Runtime.Loader;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
@@ -19,14 +19,30 @@ public class Function
 {
 	private readonly IServiceProvider _serviceProvider;
 	private readonly IConfiguration _configuration;
+	private static bool _assemblyHooked;
+	private readonly ILogger<Function> _logger;
 
 	public Function()
 	{
-		Log.Logger = new LoggerConfiguration()
-		.MinimumLevel.Information()
-		.Enrich.FromLogContext()
-		.WriteTo.Console()
-		.CreateLogger();
+		if (!_assemblyHooked)
+		{
+			Console.WriteLine("Iniciando registro desde Resolving.");
+			AssemblyLoadContext.Default.Resolving += (context, assemblyName) =>
+			{
+				var path = Path.Combine("/opt", $"{assemblyName.Name}.dll");
+				Console.WriteLine($"[Resolving] Buscando DLL: {path}");
+				if (File.Exists(path))
+				{
+					Console.WriteLine($"[Resolving] Cargando: {path}");
+					return context.LoadFromAssemblyPath(path);
+				}
+				Console.WriteLine($"[Resolving] No se encontró: {path}");
+				return null;
+			};
+
+			Console.WriteLine("AssemblyLoadContext registrado desde staticctor.");
+			_assemblyHooked = true;
+		}
 
 		var builder = new ConfigurationBuilder()
 			.SetBasePath(Directory.GetCurrentDirectory())
@@ -35,11 +51,12 @@ public class Function
 
 		_configuration = builder.Build();
 		var services = new ServiceCollection();
- 
+
 		services.AddLogging(logging =>
 		{
 			logging.ClearProviders();
-			logging.AddSerilog(dispose: true);
+			logging.AddConsole();
+			logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Information);
 		});
 
 		services.AddSingleton<IConfiguration>(_configuration);
@@ -47,61 +64,47 @@ public class Function
 		services.AddInfrastructure(_configuration);
 
 		_serviceProvider = services.BuildServiceProvider();
+		_logger = _serviceProvider.GetRequiredService<ILogger<Function>>();
 	}
 
 	public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context)
 	{
-		LogToFile("Iniciando Lambda");
+		_logger.LogInformation("Iniciando Lambda");
+		_logger.LogInformation("Request All: {Request}", JsonConvert.SerializeObject(request));
 
 		try
 		{
-			LogToFile($"All Request: {request}");
-			LogToFile($"Request Body: {request.Body}");
-			var mediator = _serviceProvider.GetRequiredService<IMediator>();
+			_logger.LogInformation($"Request Body: {request.Body}");
+			using (var scope = _serviceProvider.CreateScope())
+			{
+				var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+				_logger.LogInformation("Deserialización completada.");
+				var command = JsonConvert.DeserializeObject<CreateCustomerCommand>(request.Body);
 
-			LogToFile("Deserialización completada.");
-			var command = JsonConvert.DeserializeObject<CreateCustomerCommand>(request.Body);
+				_logger.LogInformation("Enviar mensaje CQRS.");
+				var result = await mediator.Send(command!);
+				_logger.LogInformation("Mensaje CQRS enviado.");
 
-			LogToFile("Enviar mensaje CQRS.");
-			var result = await mediator.Send(command!);
-	
-			LogToFile("Mensaje CQRS enviado.");
-
-			return result.Match(
-				customerId => LambdaResponse.Success(new { CustomerId = customerId }, 201),
-				errors => LambdaResponse.Error(errors)
-			);
+				return result.Match(
+					customerId => LambdaResponse.Success(new { CustomerId = customerId }, 201),
+					errors => LambdaResponse.Error(errors)
+				);
+			}
 		}
 		catch (Exception ex)
 		{
-			LogToFile($"Error: {ex.Message}");
-			LogToFile($"StackTrace: {ex.StackTrace}");
+			_logger.LogError($"Error: {ex.Message}");
+			_logger.LogError($"StackTrace: {ex.StackTrace}");
 
 			return new APIGatewayProxyResponse
 			{
 				StatusCode = 500,
 				Body = $"Error interno: {ex.Message}"
 			};
-		}finally
+		}
+		finally
 		{
-			Log.CloseAndFlush();
+			_logger.LogInformation("Finalizando Lambda");
 		}
 	}
-
-	private void LogToFile(string message)
-	{
-		var environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
-
-		Console.WriteLine($"Environment: {environment}");
-
-		if (environment == "Development")
-		{
-			var logPath = Path.Combine(Directory.GetCurrentDirectory(), "log-lambda.txt");
-			File.AppendAllText(logPath, $"[{DateTime.Now:HH:mm:ss}] {message}{Environment.NewLine}");
-		}
-		else
-		{
-			Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {message}");
-		}
-	} 
 }

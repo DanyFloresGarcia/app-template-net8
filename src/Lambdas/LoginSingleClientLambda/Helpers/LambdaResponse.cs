@@ -6,7 +6,7 @@ namespace Helpers;
 
 public static class LambdaResponse
 {
-    public static APIGatewayProxyResponse Success(object body, int statusCode = 200) =>
+    public static APIGatewayHttpApiV2ProxyResponse Success(object body, int statusCode = 200) =>
         new()
         {
             StatusCode = statusCode,
@@ -14,7 +14,7 @@ public static class LambdaResponse
             Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
         };
 
-    public static APIGatewayProxyResponse Error(List<Error> errors, int statusCode = 400) =>
+    public static APIGatewayHttpApiV2ProxyResponse Error(List<Error> errors, int statusCode = 400) =>
         new()
         {
             StatusCode = statusCode,

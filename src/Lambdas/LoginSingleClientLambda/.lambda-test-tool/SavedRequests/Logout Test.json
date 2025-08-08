@@ -1,0 +1,10 @@
+{
+  "body": "{ \"refreshToken\": \"654sfsrewrfdsfds\"  }",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "isBase64Encoded": false,
+  "path": "/logout",
+  "queryStringParameters": null
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Frontend con Proxy</title>
+  </head>
+  <body>
+    <script>
+      async function login() {
+        const response = await fetch('http://localhost:3000/api/proxy', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: 'daflores',
+            password: 'DFGServer181296$$$$$'
+          })
+        });
+
+        const result = await response.json();
+        console.log(result);
+      }
+
+      login();
+    </script>
+  </body>
+</html>

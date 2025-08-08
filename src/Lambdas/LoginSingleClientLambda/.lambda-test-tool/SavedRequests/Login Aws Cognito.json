@@ -5,6 +5,6 @@
     "Content-Type": "application/json"
   },
   "isBase64Encoded": false,
-  "path": "/",
+  "path": "/login",
   "queryStringParameters": null
 }
