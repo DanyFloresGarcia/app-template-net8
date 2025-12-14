@@ -26,7 +26,7 @@ public class LogoutCommandHandler : IRequestHandler<LogoutCommand, ErrorOr<Logou
             try
             {
                 var response = await _loginService.LogoutAsync(command.RefreshToken);
-                if (response is null){
+                if (response.IsError){
                     _logger.LogError("Logout failed for RefreshToken: {RefreshToken}", command.RefreshToken);
                     return Error.Failure(
                         code: "Logout.Failure",

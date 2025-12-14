@@ -1,6 +1,6 @@
 
 using Application.Auth.Params;
-using Application.Data;
+using Application.Auth;
 using Infrastructure.Common;
 using Microsoft.Extensions.Logging;
 

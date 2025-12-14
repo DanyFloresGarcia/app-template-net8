@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 using Domain.Customers.Interfaces;
 using Domain.Primitives;
 using Application.Common.Mappings;
@@ -10,6 +9,8 @@ using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
 using Infrastructure.Common;
 using Infrastructure.Providers;
+using Application.Auth;
+using Application.Currencys.Calculators;
 
 namespace Infrastructure;
 
@@ -18,19 +19,14 @@ public static class DependencyInjection
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
                 services.AddPersistence(configuration);
+                services.AddAuthDisabledInfrastructure(configuration);
+                services.AddCurrencyInfrastructure(configuration);
                 return services;
         }
 
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
                 var databaseSettings = configuration.GetSection("DatabaseSettings").Get<DatabaseSettings>()!;
-                var loginCredentials = configuration.GetSection("LoginCredentials").Get<LoginCredentials>()!;
-
-                if (loginCredentials is not null)
-                {
-                        Console.WriteLine("LoginCredentials.ClientId:" + loginCredentials.ClientId);
-                        services.AddSingleton(loginCredentials);
-                }
 
                 Console.WriteLine("Cadena de conexión:" + databaseSettings.ConnectionString);
                 switch (databaseSettings.Provider)
@@ -58,14 +54,65 @@ public static class DependencyInjection
                 // services.AddScoped<IUnitOfWork>(sp =>
                 // sp.GetRequiredService<IApplicationDbContext>());
 
-                //Domain
+                //Services
+
+                //Singleton
+
+                //services.AddTransient<SomeApplication>();
+
+                return services;
+        }
+
+        public static IServiceCollection AddCognitoAuth(this IServiceCollection services, IConfiguration configuration)
+        {
+                var loginCredentials = configuration.GetSection("LoginCredentials").Get<LoginCredentials>()!;
+
+                if (loginCredentials is not null)
+                {
+                        Console.WriteLine("LoginCredentials.ClientId:" + loginCredentials.ClientId);
+                        services.AddSingleton(loginCredentials);
+                }
+
                 //Services
                 services.AddScoped<ILoginService, CognitoAuthProvider>();
-
                 //Singleton
                 services.AddSingleton<ICredentialsProvider, CognitoCredentialsProvider>();
 
-                //services.AddTransient<SomeApplication>();
+                return services;
+        }
+        public static IServiceCollection AddAuthDisabledInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        { 
+                var loginCredentials = configuration.GetSection("LoginCredentials").Get<LoginCredentials>()!;
+
+                if (loginCredentials is not null)
+                {
+                        Console.WriteLine("LoginCredentials.ClientId:" + loginCredentials.ClientId);
+                        services.AddSingleton(loginCredentials);
+                }
+
+                //Services
+                services.AddScoped<ILoginService, DisabledAuthProvider>();
+                //Singleton
+                services.AddSingleton<ICredentialsProvider, DisabledCredentialsProvider>();
+
+                return services;
+        }
+
+         public static IServiceCollection AddCurrencyInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        { 
+                var loginCredentials = configuration.GetSection("LoginCredentials").Get<LoginCredentials>()!;
+
+                if (loginCredentials is not null)
+                {
+                        Console.WriteLine("LoginCredentials.ClientId:" + loginCredentials.ClientId);
+                        services.AddSingleton(loginCredentials);
+                }
+
+                //Services
+                services.AddScoped<ICurrencyCalculator, EurCurrencyCalculator>();
+                services.AddScoped<ICurrencyCalculator, UsdCurrencyCalculator>();
+                services.AddScoped<ICurrencyCalculator, JpyCurrencyCalculator>();
+                services.AddScoped<ICurrencyCalculatorResolver, CurrencyCalculatorResolver>();
 
                 return services;
         }

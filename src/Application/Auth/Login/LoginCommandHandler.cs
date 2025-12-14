@@ -26,7 +26,8 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<LoginRe
             try
             {
                 var response = await _loginService.LoginAsync(command.UserName, command.Password);
-                if (response is null){
+                if (response.IsError)
+                {
                     _logger.LogError("Login failed for user: {UserName}", command.UserName);
                     return Error.Failure(
                         code: "Login.Failure",

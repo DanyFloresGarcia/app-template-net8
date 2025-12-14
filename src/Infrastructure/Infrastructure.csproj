@@ -19,6 +19,7 @@
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.8.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0-preview.3.efcore.9.0.0" />
     <PackageReference Include="AWSSDK.CognitoIdentityProvider" Version="4.0.1.13" />
+    <PackageReference Include="ErrorOr" Version="2.0.1" />
   </ItemGroup>
   
   <PropertyGroup>

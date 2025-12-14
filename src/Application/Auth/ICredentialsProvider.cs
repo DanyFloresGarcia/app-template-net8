@@ -1,6 +1,6 @@
 using Application.Auth.Params;
 
-namespace Application.Data;
+namespace Application.Auth;
 public interface ICredentialsProvider
 {
     LoginParam GetLoginParam();

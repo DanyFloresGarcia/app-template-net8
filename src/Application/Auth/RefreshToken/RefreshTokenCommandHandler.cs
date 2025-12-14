@@ -26,7 +26,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, E
             try
             {
                 var response = await _loginService.RefreshTokenAsync(command.RefreshToken);
-                if (response is null){
+                if (response.IsError){
                     _logger.LogError("RefreshToken failed for RefreshToken: {RefreshToken}", command.RefreshToken);
                     return Error.Failure(
                         code: "RefreshToken.Failure",

@@ -1,9 +1,10 @@
 using Application.Auth.Dtos;
-using Application.Data;
+using Application.Auth;
 using Microsoft.Extensions.Logging;
 using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
 using Application.Auth.Params;
+using ErrorOr;
 
 namespace Infrastructure.Providers;
 
@@ -13,7 +14,7 @@ public class CognitoAuthProvider(ICredentialsProvider credentialsProvider, ILogg
     private readonly ILogger<CognitoAuthProvider> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
 
-    public async Task<LoginResponse> LoginAsync(string userName, string password)
+    public async Task<ErrorOr<LoginResponse>> LoginAsync(string userName, string password)
     {
         // Crear cliente de Cognito
         var cognito = new AmazonCognitoIdentityProviderClient();
@@ -52,7 +53,7 @@ public class CognitoAuthProvider(ICredentialsProvider credentialsProvider, ILogg
                                  authResponse.AuthenticationResult.RefreshToken,
                                  authResponse.AuthenticationResult.ExpiresIn);
     }
-    public async Task<LogoutResponse> LogoutAsync(string refreshToken)
+    public async Task<ErrorOr<LogoutResponse>> LogoutAsync(string refreshToken)
     {
         var cognito = new AmazonCognitoIdentityProviderClient();
 
@@ -77,7 +78,7 @@ public class CognitoAuthProvider(ICredentialsProvider credentialsProvider, ILogg
         return new LogoutResponse(true, "Token revoked successfully");
     }
 
-    public async Task<RefreshTokenResponse> RefreshTokenAsync(string refreshToken)
+    public async Task<ErrorOr<RefreshTokenResponse>> RefreshTokenAsync(string refreshToken)
     {
         var cognito = new AmazonCognitoIdentityProviderClient();
 

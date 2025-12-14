@@ -59,9 +59,9 @@ public class Function
 			logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Information);
 		});
 
-		services.AddSingleton<IConfiguration>(_configuration);
-		services.AddApplication();
-		services.AddInfrastructure(_configuration);
+		services.AddSingleton<IConfiguration>(_configuration)
+			.AddApplication()
+			.AddPersistence(_configuration);
 
 		_serviceProvider = services.BuildServiceProvider();
 		_logger = _serviceProvider.GetRequiredService<ILogger<Function>>();

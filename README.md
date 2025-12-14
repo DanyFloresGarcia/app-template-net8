@@ -201,6 +201,8 @@ Contenido:
 ## 8. Agregar al proyecto solucion desde la raiz del proyecto
 ```
   dotnet sln add src/Lambdas/CreateInvitadoLambda/CreateInvitadoLambda.csproj 
+  dotnet sln add src/Lambdas/LoginSingleClientLambda/LoginSingleClientLambda.csproj 
+  
 ```
 ## 9. Instalar globalmente el amazon lambda Tools para probar, ejecutar en un cmd global
 ```
